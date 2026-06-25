@@ -3,8 +3,6 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import {
   ArrowLeft, ArrowRight, CheckCircle2, AlertTriangle, Info,
-  Briefcase, Users, Target, BarChart3, Clock, FileText,
-  TestTube2, Rocket, Award, RefreshCw, Settings, Zap,
 } from "lucide-react";
 
 const toc = [
@@ -120,6 +118,11 @@ function Bdg({ children, color = "indigo" }: { children: React.ReactNode; color?
 
 function Glass({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return <div className={`glass rounded-2xl p-6 ${className}`}>{children}</div>;
+}
+
+// Helper to avoid jsx-key errors when Bdg is used inside array literals
+function bd(color: string, text: string): React.ReactNode {
+  return <Bdg color={color}>{text}</Bdg>;
 }
 
 export default function RecruitmentCaseStudy() {
@@ -315,12 +318,12 @@ export default function RecruitmentCaseStudy() {
             <S id="stakeholders" num="04" title="Stakeholder Analysis"
               sub="Who I engaged, their stake in the project, and how I managed resistance.">
               <T hs={["Name / Role", "Power", "Interest", "Primary Concern", "My Engagement Approach"]} rows={[
-                ["Claire Moss — HR Business Partner",        <Bdg color="red">High</Bdg>,    <Bdg color="red">High</Bdg>,    "End-to-end process ownership post go-live",       "Project co-lead; daily collaboration; process co-designer"],
-                ["Michael Torres — CFO",                     <Bdg color="red">High</Bdg>,    <Bdg color="yellow">Med</Bdg>,  "ROI justification; cost of bad hires",            "Monthly exec briefing; ROI model shared in Wk 1"],
-                ["4 Departmental Hiring Managers",           <Bdg color="yellow">Med</Bdg>,  <Bdg color="red">High</Bdg>,    "Losing control of their own process",             "Individual 1:1 interviews; included in process design workshop"],
-                ["Layla Chen — Head of Technology",          <Bdg color="yellow">Med</Bdg>,  <Bdg color="red">High</Bdg>,    "Feared over-formalisation of tech hiring",        "Specifically co-designed the tech scorecard with her"],
-                ["IT Lead",                                  <Bdg color="yellow">Med</Bdg>,  <Bdg color="yellow">Med</Bdg>,  "SSO, data security, GDPR compliance",             "Technical design review in Wk 3; sign-off before build"],
-                ["12 Hiring Managers (wider)",               <Bdg color="green">Low</Bdg>,   <Bdg color="red">High</Bdg>,    "Learning a new tool; extra workload perception",  "UAT participation; 4 training sessions; named as champions"],
+                ["Claire Moss — HR Business Partner",        bd("red","High"),    bd("red","High"),    "End-to-end process ownership post go-live",       "Project co-lead; daily collaboration; process co-designer"],
+                ["Michael Torres — CFO",                     bd("red","High"),    bd("yellow","Med"),  "ROI justification; cost of bad hires",            "Monthly exec briefing; ROI model shared in Wk 1"],
+                ["4 Departmental Hiring Managers",           bd("yellow","Med"),  bd("red","High"),    "Losing control of their own process",             "Individual 1:1 interviews; included in process design workshop"],
+                ["Layla Chen — Head of Technology",          bd("yellow","Med"),  bd("red","High"),    "Feared over-formalisation of tech hiring",        "Specifically co-designed the tech scorecard with her"],
+                ["IT Lead",                                  bd("yellow","Med"),  bd("yellow","Med"),  "SSO, data security, GDPR compliance",             "Technical design review in Wk 3; sign-off before build"],
+                ["12 Hiring Managers (wider)",               bd("green","Low"),   bd("red","High"),    "Learning a new tool; extra workload perception",  "UAT participation; 4 training sessions; named as champions"],
               ]} />
               <IB t="i">
                 <strong>Key resistance managed:</strong> Layla Chen (Head of Technology) pushed back on a standardised scorecard,
@@ -408,15 +411,15 @@ export default function RecruitmentCaseStudy() {
             <S id="gap-analysis" num="08" title="Gap Analysis"
               sub="Current capability vs required capability across every step of the hiring lifecycle.">
               <T hs={["Capability", "Current State", "Required State", "Gap", "Priority"]} rows={[
-                ["Application Tracking",        "Shared Gmail inbox",                   "Lever ATS — all applicants in one place",           "Critical", <Bdg color="red">Must</Bdg>],
-                ["Candidate Communication",     "Manual emails, no template, no SLA",   "Automated acknowledgements within 24 hrs",          "Critical", <Bdg color="red">Must</Bdg>],
-                ["Interview Scheduling",        "14-email back-and-forth (4.5 days)",   "Calendly integration — self-book in < 4 hrs",       "Critical", <Bdg color="red">Must</Bdg>],
-                ["Interview Scorecards",        "None — verbal feedback only",           "Structured Lever scorecards per role type",         "High",     <Bdg color="red">Must</Bdg>],
-                ["Pipeline Visibility (HR)",    "4 separate Excel sheets",              "Live Lever dashboard — all depts in one view",      "High",     <Bdg color="red">Must</Bdg>],
-                ["Process Standardisation",     "4 different processes (1 per dept)",   "Single 5-stage process with dept-specific variants","High",     <Bdg color="red">Must</Bdg>],
-                ["Offer Letter Generation",     "Written from scratch each time (1–2 days)","Lever offer templates — generated in < 1 hr",   "Medium",   <Bdg color="yellow">Should</Bdg>],
-                ["Reporting (time-to-hire etc)","No reporting — reconstructed from email","Lever auto-reports: time-to-hire, source, stage", "Medium",   <Bdg color="yellow">Should</Bdg>],
-                ["LinkedIn Integration",        "Manual posting",                       "Lever ↔ LinkedIn Recruiter sync",                  "Low",      <Bdg color="orange">Could</Bdg>],
+                ["Application Tracking",        "Shared Gmail inbox",                   "Lever ATS — all applicants in one place",           "Critical", bd("red","Must")],
+                ["Candidate Communication",     "Manual emails, no template, no SLA",   "Automated acknowledgements within 24 hrs",          "Critical", bd("red","Must")],
+                ["Interview Scheduling",        "14-email back-and-forth (4.5 days)",   "Calendly integration — self-book in < 4 hrs",       "Critical", bd("red","Must")],
+                ["Interview Scorecards",        "None — verbal feedback only",           "Structured Lever scorecards per role type",         "High",     bd("red","Must")],
+                ["Pipeline Visibility (HR)",    "4 separate Excel sheets",              "Live Lever dashboard — all depts in one view",      "High",     bd("red","Must")],
+                ["Process Standardisation",     "4 different processes (1 per dept)",   "Single 5-stage process with dept-specific variants","High",     bd("red","Must")],
+                ["Offer Letter Generation",     "Written from scratch each time (1–2 days)","Lever offer templates — generated in < 1 hr",   "Medium",   bd("yellow","Should")],
+                ["Reporting (time-to-hire etc)","No reporting — reconstructed from email","Lever auto-reports: time-to-hire, source, stage", "Medium",   bd("yellow","Should")],
+                ["LinkedIn Integration",        "Manual posting",                       "Lever ↔ LinkedIn Recruiter sync",                  "Low",      bd("orange","Could")],
               ]} />
             </S>
 
@@ -458,15 +461,15 @@ export default function RecruitmentCaseStudy() {
             <S id="brd" num="10" title="Business Requirements"
               sub="Requirements agreed with HRBP and hiring managers before ATS configuration began.">
               <T hs={["ID", "Priority", "Requirement", "Acceptance Criterion"]} rows={[
-                ["BR-001", <Bdg color="red">Must</Bdg>,    "System shall provide a single pipeline view of all open roles and candidates across all departments",                   "All depts visible in Lever; zero separate spreadsheets post go-live"],
-                ["BR-002", <Bdg color="red">Must</Bdg>,    "System shall auto-send a candidate acknowledgement email within 24 hours of application submission",                   "Acknowledgement timestamp within 24 hrs — verified in UAT"],
-                ["BR-003", <Bdg color="red">Must</Bdg>,    "System shall enable candidates to self-book interview slots via Calendly without HR email involvement",                "Scheduling completed in < 4 hours; confirmed via UAT scenario"],
-                ["BR-004", <Bdg color="red">Must</Bdg>,    "System shall provide structured interview scorecards for each role type — completed by all interviewers",             "Scorecard mandatory before candidate progresses in Lever"],
-                ["BR-005", <Bdg color="red">Must</Bdg>,    "System shall enforce a standardised 5-stage hiring process across all departments",                                   "All active roles use the agreed stage structure in Lever"],
-                ["BR-006", <Bdg color="red">Must</Bdg>,    "System shall retain candidate data for a maximum of 12 months in compliance with GDPR Article 17",                   "Auto-delete rule configured; confirmed with IT Lead and Legal"],
-                ["BR-007", <Bdg color="yellow">Should</Bdg>,"System shall auto-generate offer letters from templates when a hire decision is made in Lever",                      "Offer letter generated in < 1 hr of hire decision — no manual drafting"],
-                ["BR-008", <Bdg color="yellow">Should</Bdg>,"System shall produce a monthly HR report showing time-to-hire, stage drop-off, and offer acceptance by department",  "Report auto-delivered to HRBP on 1st of each month"],
-                ["BR-009", <Bdg color="orange">Could</Bdg>, "System shall sync open roles to LinkedIn Recruiter to surface passive candidates (Phase 2)",                        "Out of Phase 1 scope — documented in backlog"],
+                ["BR-001", bd("red","Must"),    "System shall provide a single pipeline view of all open roles and candidates across all departments",                   "All depts visible in Lever; zero separate spreadsheets post go-live"],
+                ["BR-002", bd("red","Must"),    "System shall auto-send a candidate acknowledgement email within 24 hours of application submission",                   "Acknowledgement timestamp within 24 hrs — verified in UAT"],
+                ["BR-003", bd("red","Must"),    "System shall enable candidates to self-book interview slots via Calendly without HR email involvement",                "Scheduling completed in < 4 hours; confirmed via UAT scenario"],
+                ["BR-004", bd("red","Must"),    "System shall provide structured interview scorecards for each role type — completed by all interviewers",             "Scorecard mandatory before candidate progresses in Lever"],
+                ["BR-005", bd("red","Must"),    "System shall enforce a standardised 5-stage hiring process across all departments",                                   "All active roles use the agreed stage structure in Lever"],
+                ["BR-006", bd("red","Must"),    "System shall retain candidate data for a maximum of 12 months in compliance with GDPR Article 17",                   "Auto-delete rule configured; confirmed with IT Lead and Legal"],
+                ["BR-007", bd("yellow","Should"),"System shall auto-generate offer letters from templates when a hire decision is made in Lever",                      "Offer letter generated in < 1 hr of hire decision — no manual drafting"],
+                ["BR-008", bd("yellow","Should"),"System shall produce a monthly HR report showing time-to-hire, stage drop-off, and offer acceptance by department",  "Report auto-delivered to HRBP on 1st of each month"],
+                ["BR-009", bd("orange","Could"), "System shall sync open roles to LinkedIn Recruiter to surface passive candidates (Phase 2)",                        "Out of Phase 1 scope — documented in backlog"],
               ]} />
             </S>
 
@@ -575,14 +578,14 @@ export default function RecruitmentCaseStudy() {
             <S id="uat" num="13" title="UAT & Testing"
               sub="How I validated the configured ATS against requirements — including edge cases and GDPR compliance.">
               <T hs={["Test Case", "Scenario", "Expected Result", "Actual Result", "Status"]} rows={[
-                ["TC-001", "New application submitted for open role",                       "Candidate receives auto-acknowledgement within 24 hrs",               "Received in 6 minutes",          <Bdg color="green">Pass</Bdg>],
-                ["TC-002", "HR marks candidate as shortlisted in Lever",                   "Candidate receives Calendly booking link automatically",              "Link sent immediately",           <Bdg color="green">Pass</Bdg>],
-                ["TC-003", "Candidate books interview via Calendly",                       "Event auto-created in HM calendar; Lever stage updates",             "Confirmed correctly",             <Bdg color="green">Pass</Bdg>],
-                ["TC-004", "Interviewer completes scorecard after interview",               "Scorecard saved in Lever; HM can view before decision",              "Saved and visible",               <Bdg color="green">Pass</Bdg>],
-                ["TC-005", "Hire decision made in Lever",                                  "Offer letter auto-generated from template with candidate&apos;s details", "FAIL — name field blank",     <Bdg color="red">Fail → Fixed</Bdg>],
-                ["TC-006", "Candidate rejected at any stage",                              "Auto-decline email sent within 24 hrs; candidate exits pipeline",   "Sent within 3 minutes",           <Bdg color="green">Pass</Bdg>],
-                ["TC-007", "Candidate record reaches 12-month age threshold",              "Auto-delete rule fires; data removed from Lever",                    "Confirmed via Lever audit log",   <Bdg color="green">Pass</Bdg>],
-                ["TC-008", "Hiring manager tries to advance candidate without scorecard",  "System blocks progression until scorecard is submitted",             "Blocked as required",             <Bdg color="green">Pass</Bdg>],
+                ["TC-001", "New application submitted for open role",                       "Candidate receives auto-acknowledgement within 24 hrs",               "Received in 6 minutes",          bd("green","Pass")],
+                ["TC-002", "HR marks candidate as shortlisted in Lever",                   "Candidate receives Calendly booking link automatically",              "Link sent immediately",           bd("green","Pass")],
+                ["TC-003", "Candidate books interview via Calendly",                       "Event auto-created in HM calendar; Lever stage updates",             "Confirmed correctly",             bd("green","Pass")],
+                ["TC-004", "Interviewer completes scorecard after interview",               "Scorecard saved in Lever; HM can view before decision",              "Saved and visible",               bd("green","Pass")],
+                ["TC-005", "Hire decision made in Lever",                                  "Offer letter auto-generated from template with candidate details", "FAIL — name field blank",     bd("red","Fail → Fixed")],
+                ["TC-006", "Candidate rejected at any stage",                              "Auto-decline email sent within 24 hrs; candidate exits pipeline",   "Sent within 3 minutes",           bd("green","Pass")],
+                ["TC-007", "Candidate record reaches 12-month age threshold",              "Auto-delete rule fires; data removed from Lever",                    "Confirmed via Lever audit log",   bd("green","Pass")],
+                ["TC-008", "Hiring manager tries to advance candidate without scorecard",  "System blocks progression until scorecard is submitted",             "Blocked as required",             bd("green","Pass")],
               ]} />
               <IB t="s">
                 <strong>Defect found:</strong> TC-005 revealed the offer letter template had a broken merge field for the candidate
@@ -641,13 +644,13 @@ export default function RecruitmentCaseStudy() {
                 <MC v="100%" label="Depts on Structured Process" c={CL} note="Was 0 of 4" />
               </div>
               <T hs={["Metric", "Before", "After", "Change", "vs Target"]} rows={[
-                ["Time-to-hire",                     "47 days",    "26 days",   "−45%",   <Bdg color="green">Exceeded (target: &lt; 30 days)</Bdg>],
-                ["Candidate drop-off rate",          "41%",        "16%",       "−61%",   <Bdg color="green">Exceeded (target: &lt; 25%)</Bdg>],
-                ["Offer acceptance rate",            "68%",        "84%",       "+16pts", <Bdg color="green">Exceeded (target: 75%)</Bdg>],
-                ["Interview scheduling time",        "4.5 days",   "4 hours",   "−96%",   <Bdg color="green">Exceeded (target: &lt; 1 day)</Bdg>],
-                ["Hiring manager admin per hire",    "8 hours",    "2.5 hours", "−69%",   <Bdg color="green">Exceeded</Bdg>],
-                ["Departments on standard process",  "0 of 4",     "4 of 4",    "100%",   <Bdg color="green">Achieved</Bdg>],
-                ["Structured scorecard completion",  "0%",         "100%",      "+100%",  <Bdg color="green">Achieved (BR-004)</Bdg>],
+                ["Time-to-hire",                     "47 days",    "26 days",   "−45%",   bd("green","Exceeded (target: < 30 days)")],
+                ["Candidate drop-off rate",          "41%",        "16%",       "−61%",   bd("green","Exceeded (target: < 25%)")],
+                ["Offer acceptance rate",            "68%",        "84%",       "+16pts", bd("green","Exceeded (target: 75%)")],
+                ["Interview scheduling time",        "4.5 days",   "4 hours",   "−96%",   bd("green","Exceeded (target: < 1 day)")],
+                ["Hiring manager admin per hire",    "8 hours",    "2.5 hours", "−69%",   bd("green","Exceeded")],
+                ["Departments on standard process",  "0 of 4",     "4 of 4",    "100%",   bd("green","Achieved")],
+                ["Structured scorecard completion",  "0%",         "100%",      "+100%",  bd("green","Achieved (BR-004)")],
               ]} />
               <IB t="s">
                 <strong>Claire Moss (HRBP) at post-implementation review:</strong> &ldquo;We&apos;ve already had two senior hires

@@ -1,5 +1,4 @@
 "use client";
-import { motion } from "framer-motion";
 import { Mail, ArrowUp } from "lucide-react";
 import { LinkedInIcon, GitHubIcon } from "@/components/ui/SocialIcons";
 import { navLinks } from "@/data/navigation";

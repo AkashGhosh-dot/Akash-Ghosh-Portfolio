@@ -1,13 +1,12 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import {
   ArrowLeft, ArrowRight, CheckCircle2, AlertTriangle, Info,
-  Code2, Users, Target, BarChart3, Shield, Database, TrendingUp,
-  Zap, BookOpen, Award, Wrench, Clock, Activity, Eye,
-  GitBranch, TestTube2, Rocket, Settings, MessageSquare,
-  FileText, Star, RefreshCw, PieChart, Layers
+  Code2, Users, Target, BarChart3, Shield,
+  Zap, BookOpen, Activity,
+  GitBranch, TestTube2, MessageSquare,
+  FileText, PieChart,
 } from "lucide-react";
 
 // ── TOC ──────────────────────────────────────────────────────────
@@ -171,6 +170,11 @@ function Glass({ children, className = "" }: { children: React.ReactNode; classN
   return (
     <div className={`glass rounded-2xl p-6 ${className}`}>{children}</div>
   );
+}
+
+// Helper to avoid jsx-key errors when Bdg is used inside array literals
+function bd(color: string, text: string): React.ReactNode {
+  return <Bdg color={color}>{text}</Bdg>;
 }
 
 // ── Page ──────────────────────────────────────────────────────────
@@ -347,7 +351,7 @@ export default function CRMCaseStudy() {
               <p className="text-[#9CA3AF] leading-relaxed">
                 The consequence was predictable: <span className="text-[#F9FAFB] font-medium">35% of inbound leads received
                 no follow-up within 72 hours</span>. Research consistently shows that leads contacted within the first hour
-                are 7× more likely to convert. At TechVantage's average deal size of $32K and 18% close rate,
+                are 7× more likely to convert. At TechVantage&apos;s average deal size of $32K and 18% close rate,
                 each lost lead represented meaningful revenue. The estimated annual impact was <span className="text-[#F9FAFB] font-medium">$1.8M
                 in uncontacted or duplicated pipeline</span>.
               </p>
@@ -387,13 +391,13 @@ export default function CRMCaseStudy() {
             <S id="stakeholder-analysis" num="05" title="Stakeholder Analysis"
               sub="Identifying who was affected, their level of influence, and how I engaged them throughout the project.">
               <T hs={["Name", "Role", "Power", "Interest", "Engagement Strategy", "Primary Concern"]} rows={[
-                ["James Okafor",  "Sales Director",          <Bdg color="red">High</Bdg>,    <Bdg color="red">High</Bdg>,    "Weekly steering meetings · sign-off authority", "Pipeline visibility & forecast accuracy"],
-                ["Priya Mehta",   "Marketing Manager",       <Bdg color="yellow">Med</Bdg>,  <Bdg color="red">High</Bdg>,    "Bi-weekly syncs · requirements workshops",      "Lead source attribution & MQL handoff quality"],
-                ["David Chen",    "IT Systems Lead",         <Bdg color="red">High</Bdg>,    <Bdg color="yellow">Med</Bdg>,  "Technical design reviews · sign-off on arch.",  "Security, SSO, data governance"],
-                ["Rachel Torres", "Senior Account Executive",<Bdg color="green">Low</Bdg>,   <Bdg color="red">High</Bdg>,    "User interviews · UAT champion · feedback",     "Ease of use, no extra admin work"],
-                ["Emma Williams", "Head of Customer Success",<Bdg color="yellow">Med</Bdg>,  <Bdg color="yellow">Med</Bdg>,  "Journey mapping session · monthly update",      "CRM data accuracy post-handoff to CS"],
-                ["Liam Brooks",   "Finance Controller",      <Bdg color="green">Low</Bdg>,   <Bdg color="green">Low</Bdg>,   "Budget reviews · ROI sign-off",                 "Project cost vs projected revenue uplift"],
-                ["Rohan Kapoor",  "CEO",                     <Bdg color="red">High</Bdg>,    <Bdg color="green">Low</Bdg>,   "Monthly exec briefings · escalation path",      "Forecast confidence, board-level reporting"],
+                ["James Okafor",  "Sales Director",          bd("red","High"),    bd("red","High"),    "Weekly steering meetings · sign-off authority", "Pipeline visibility & forecast accuracy"],
+                ["Priya Mehta",   "Marketing Manager",       bd("yellow","Med"),  bd("red","High"),    "Bi-weekly syncs · requirements workshops",      "Lead source attribution & MQL handoff quality"],
+                ["David Chen",    "IT Systems Lead",         bd("red","High"),    bd("yellow","Med"),  "Technical design reviews · sign-off on arch.",  "Security, SSO, data governance"],
+                ["Rachel Torres", "Senior Account Executive",bd("green","Low"),   bd("red","High"),    "User interviews · UAT champion · feedback",     "Ease of use, no extra admin work"],
+                ["Emma Williams", "Head of Customer Success",bd("yellow","Med"),  bd("yellow","Med"),  "Journey mapping session · monthly update",      "CRM data accuracy post-handoff to CS"],
+                ["Liam Brooks",   "Finance Controller",      bd("green","Low"),   bd("green","Low"),   "Budget reviews · ROI sign-off",                 "Project cost vs projected revenue uplift"],
+                ["Rohan Kapoor",  "CEO",                     bd("red","High"),    bd("green","Low"),   "Monthly exec briefings · escalation path",      "Forecast confidence, board-level reporting"],
               ]} />
               <Glass>
                 <h3 className="text-[#F9FAFB] text-sm font-semibold mb-4 uppercase tracking-wider">Power / Interest Grid</h3>
@@ -474,14 +478,14 @@ export default function CRMCaseStudy() {
             <S id="pain-points" num="08" title="Pain Points Identified"
               sub="Synthesised from interviews, process observation, and data audit. Each pain point rated by business impact.">
               <T hs={["ID", "Pain Point", "Severity", "Source", "Quantified Impact"]} rows={[
-                ["PP-01", "No single source of truth — 4 disconnected spreadsheets",     <Bdg color="red">Critical</Bdg>,    "Interviews + Audit",   "~200 duplicate records/quarter; AEs working on stale data"],
-                ["PP-02", "Lead assignment by ad-hoc Slack messages",                     <Bdg color="red">Critical</Bdg>,    "Observation",          "Avg 4–6 hr assignment delay; 12% of leads unassigned after 24 hrs"],
-                ["PP-03", "No automated follow-up reminders",                             <Bdg color="red">Critical</Bdg>,    "Interviews",           "35% of leads not followed up within 72 hrs"],
-                ["PP-04", "No lead scoring — all leads treated equally",                  <Bdg color="yellow">High</Bdg>,     "Interviews + Survey",  "AEs spending equal time on cold and hot leads"],
-                ["PP-05", "No lead source attribution",                                   <Bdg color="yellow">High</Bdg>,     "Interviews",           "Marketing unable to measure campaign ROI"],
-                ["PP-06", "Sales reporting built manually every week",                    <Bdg color="yellow">High</Bdg>,     "Observation",          "6–8 hrs/week = ~$18K/year in Sales Manager time"],
-                ["PP-07", "No integration between email marketing and lead data",         <Bdg color="yellow">High</Bdg>,     "Interviews",           "Marketing email clicks not visible to sales reps"],
-                ["PP-08", "New leads not visible to Sales Director in real time",         <Bdg color="orange">Medium</Bdg>,   "Interviews",           "Forecast accuracy unreliable; board conversations affected"],
+                ["PP-01", "No single source of truth — 4 disconnected spreadsheets",     bd("red","Critical"),    "Interviews + Audit",   "~200 duplicate records/quarter; AEs working on stale data"],
+                ["PP-02", "Lead assignment by ad-hoc Slack messages",                     bd("red","Critical"),    "Observation",          "Avg 4–6 hr assignment delay; 12% of leads unassigned after 24 hrs"],
+                ["PP-03", "No automated follow-up reminders",                             bd("red","Critical"),    "Interviews",           "35% of leads not followed up within 72 hrs"],
+                ["PP-04", "No lead scoring — all leads treated equally",                  bd("yellow","High"),     "Interviews + Survey",  "AEs spending equal time on cold and hot leads"],
+                ["PP-05", "No lead source attribution",                                   bd("yellow","High"),     "Interviews",           "Marketing unable to measure campaign ROI"],
+                ["PP-06", "Sales reporting built manually every week",                    bd("yellow","High"),     "Observation",          "6–8 hrs/week = ~$18K/year in Sales Manager time"],
+                ["PP-07", "No integration between email marketing and lead data",         bd("yellow","High"),     "Interviews",           "Marketing email clicks not visible to sales reps"],
+                ["PP-08", "New leads not visible to Sales Director in real time",         bd("orange","Medium"),   "Interviews",           "Forecast accuracy unreliable; board conversations affected"],
               ]} />
             </S>
 
@@ -536,16 +540,16 @@ export default function CRMCaseStudy() {
             <S id="gap-analysis" num="10" title="Gap Analysis"
               sub="Structured comparison of current capabilities vs required capabilities to define the true scope of change.">
               <T hs={["Capability Area", "Current State", "Required State", "Gap", "Priority"]} rows={[
-                ["Lead Capture",       "Manual entry into spreadsheets",          "Auto-capture from web forms into CRM",           "High",  <Bdg color="red">Critical</Bdg>],
-                ["Lead Assignment",    "Ad-hoc Slack messages",                   "Rules-based auto-assignment (territory + round-robin)", "High", <Bdg color="red">Critical</Bdg>],
-                ["Lead Scoring",       "None — all leads equal",                  "Demographic + behavioural scoring model",        "High",  <Bdg color="red">Critical</Bdg>],
-                ["Follow-up Tracking", "Personal calendars / no tracking",        "Automated task creation + escalation",           "High",  <Bdg color="red">Critical</Bdg>],
-                ["Pipeline Visibility","Weekly manual report (Fri afternoon)",     "Real-time dashboard (HubSpot + Power BI)",       "High",  <Bdg color="yellow">High</Bdg>],
-                ["Email Integration",  "No link between Mailchimp and CRM",       "Bidirectional sync — email engagement in CRM",   "Med",   <Bdg color="yellow">High</Bdg>],
-                ["Reporting",          "6–8 hrs/week manual spreadsheet build",   "Automated dashboards with scheduled exports",    "Med",   <Bdg color="yellow">High</Bdg>],
-                ["Data Quality",       "~200 duplicates/quarter, inconsistent fields","Deduplication rules, mandatory fields, validation","Med", <Bdg color="orange">Medium</Bdg>],
-                ["Mobile Access",      "Desktop spreadsheet only",                "HubSpot mobile app — iOS + Android",             "Low",   <Bdg color="orange">Medium</Bdg>],
-                ["Forecast Accuracy",  "Unknown / manually guessed",              "Deal-stage-weighted pipeline forecast in HubSpot","High",  <Bdg color="yellow">High</Bdg>],
+                ["Lead Capture",       "Manual entry into spreadsheets",          "Auto-capture from web forms into CRM",           "High",  bd("red","Critical")],
+                ["Lead Assignment",    "Ad-hoc Slack messages",                   "Rules-based auto-assignment (territory + round-robin)", "High", bd("red","Critical")],
+                ["Lead Scoring",       "None — all leads equal",                  "Demographic + behavioural scoring model",        "High",  bd("red","Critical")],
+                ["Follow-up Tracking", "Personal calendars / no tracking",        "Automated task creation + escalation",           "High",  bd("red","Critical")],
+                ["Pipeline Visibility","Weekly manual report (Fri afternoon)",     "Real-time dashboard (HubSpot + Power BI)",       "High",  bd("yellow","High")],
+                ["Email Integration",  "No link between Mailchimp and CRM",       "Bidirectional sync — email engagement in CRM",   "Med",   bd("yellow","High")],
+                ["Reporting",          "6–8 hrs/week manual spreadsheet build",   "Automated dashboards with scheduled exports",    "Med",   bd("yellow","High")],
+                ["Data Quality",       "~200 duplicates/quarter, inconsistent fields","Deduplication rules, mandatory fields, validation","Med", bd("orange","Medium")],
+                ["Mobile Access",      "Desktop spreadsheet only",                "HubSpot mobile app — iOS + Android",             "Low",   bd("orange","Medium")],
+                ["Forecast Accuracy",  "Unknown / manually guessed",              "Deal-stage-weighted pipeline forecast in HubSpot","High",  bd("yellow","High")],
               ]} />
             </S>
 
@@ -712,18 +716,18 @@ export default function CRMCaseStudy() {
             <S id="brd" num="15" title="Business Requirements Document (BRD)"
               sub="Extracted from the 28-page BRD. Each requirement maps to a business goal and has a defined acceptance criterion.">
               <T hs={["ID", "Priority", "Business Requirement", "Source", "Acceptance Criterion"]} rows={[
-                ["BR-001", <Bdg color="red">Must</Bdg>,    "System shall provide a single source of truth for all lead and contact data",                 "PP-01 / G1", "100% of leads exist only in HubSpot after migration"],
-                ["BR-002", <Bdg color="red">Must</Bdg>,    "System shall auto-assign leads to reps based on defined territory and round-robin rules",     "PP-02 / G2", "Lead assigned < 5 min of capture with no manual action"],
-                ["BR-003", <Bdg color="red">Must</Bdg>,    "System shall track all lead interactions with full chronological history",                    "PP-06",      "All calls, emails, notes visible on contact timeline"],
-                ["BR-004", <Bdg color="red">Must</Bdg>,    "System shall provide real-time pipeline visibility to Sales Manager and Director",            "PP-08 / G6", "Dashboard reflects pipeline changes < 15 min delay"],
-                ["BR-005", <Bdg color="red">Must</Bdg>,    "System shall automate follow-up task creation and escalation for uncontacted leads",          "PP-03 / G4", "Task auto-created; escalation fires if no activity in 24 hrs"],
-                ["BR-006", <Bdg color="red">Must</Bdg>,    "System shall integrate bidirectionally with Mailchimp for email engagement data",             "PP-07",      "Email opens/clicks appear in HubSpot contact timeline"],
-                ["BR-007", <Bdg color="red">Must</Bdg>,    "System shall calculate and display lead scores based on defined scoring model",               "PP-04",      "Score visible on contact record; updates in real time"],
-                ["BR-008", <Bdg color="yellow">Should</Bdg>,"System shall provide automated weekly performance reports for Sales Director",               "PP-06 / G7", "Report auto-delivered Monday 08:00 — no manual input"],
-                ["BR-009", <Bdg color="yellow">Should</Bdg>,"System shall capture lead source attribution for all inbound leads",                        "PP-05",      "Source field populated on 100% of new contacts"],
-                ["BR-010", <Bdg color="yellow">Should</Bdg>,"System shall support closed-lost reason capture for all lost deals",                        "G8",         "Closed-lost reason mandatory before stage change to Lost"],
-                ["BR-011", <Bdg color="orange">Could</Bdg>, "System shall be accessible via mobile app (iOS and Android)",                               "Survey",     "HubSpot mobile app — all core lead actions available"],
-                ["BR-012", <Bdg color="gray">Won't</Bdg>,  "System shall integrate with Finance for invoice generation (Phase 2 scope)",                 "Liam Brooks","Out of scope for Phase 1 — documented in backlog"],
+                ["BR-001", bd("red","Must"),    "System shall provide a single source of truth for all lead and contact data",                 "PP-01 / G1", "100% of leads exist only in HubSpot after migration"],
+                ["BR-002", bd("red","Must"),    "System shall auto-assign leads to reps based on defined territory and round-robin rules",     "PP-02 / G2", "Lead assigned < 5 min of capture with no manual action"],
+                ["BR-003", bd("red","Must"),    "System shall track all lead interactions with full chronological history",                    "PP-06",      "All calls, emails, notes visible on contact timeline"],
+                ["BR-004", bd("red","Must"),    "System shall provide real-time pipeline visibility to Sales Manager and Director",            "PP-08 / G6", "Dashboard reflects pipeline changes < 15 min delay"],
+                ["BR-005", bd("red","Must"),    "System shall automate follow-up task creation and escalation for uncontacted leads",          "PP-03 / G4", "Task auto-created; escalation fires if no activity in 24 hrs"],
+                ["BR-006", bd("red","Must"),    "System shall integrate bidirectionally with Mailchimp for email engagement data",             "PP-07",      "Email opens/clicks appear in HubSpot contact timeline"],
+                ["BR-007", bd("red","Must"),    "System shall calculate and display lead scores based on defined scoring model",               "PP-04",      "Score visible on contact record; updates in real time"],
+                ["BR-008", bd("yellow","Should"),"System shall provide automated weekly performance reports for Sales Director",               "PP-06 / G7", "Report auto-delivered Monday 08:00 — no manual input"],
+                ["BR-009", bd("yellow","Should"),"System shall capture lead source attribution for all inbound leads",                        "PP-05",      "Source field populated on 100% of new contacts"],
+                ["BR-010", bd("yellow","Should"),"System shall support closed-lost reason capture for all lost deals",                        "G8",         "Closed-lost reason mandatory before stage change to Lost"],
+                ["BR-011", bd("orange","Could"), "System shall be accessible via mobile app (iOS and Android)",                               "Survey",     "HubSpot mobile app — all core lead actions available"],
+                ["BR-012", bd("gray","Won't"),   "System shall integrate with Finance for invoice generation (Phase 2 scope)",                "Liam Brooks","Out of scope for Phase 1 — documented in backlog"],
               ]} />
             </S>
 
@@ -731,21 +735,21 @@ export default function CRMCaseStudy() {
             <S id="functional-req" num="16" title="Functional Requirements"
               sub="Derived from BRD. Each FR specifies exactly what the system must do — the developer target.">
               <T hs={["ID", "Module", "Functional Requirement", "BR Ref", "Priority"]} rows={[
-                ["FR-001", "Lead Capture",    "System shall auto-create a HubSpot contact on web form submission with all form fields mapped",             "BR-001", <Bdg color="red">Must</Bdg>],
-                ["FR-002", "Lead Capture",    "System shall capture UTM source, medium, and campaign parameters on all inbound contacts",                  "BR-009", <Bdg color="red">Must</Bdg>],
-                ["FR-003", "Assignment",      "System shall assign leads to reps based on territory (region) with round-robin fallback for same region",   "BR-002", <Bdg color="red">Must</Bdg>],
-                ["FR-004", "Assignment",      "System shall send email + Slack notification to assigned rep within 5 minutes of lead creation",            "BR-002", <Bdg color="red">Must</Bdg>],
-                ["FR-005", "Follow-up",       "System shall create a follow-up task for assigned rep automatically on lead creation",                      "BR-005", <Bdg color="red">Must</Bdg>],
-                ["FR-006", "Follow-up",       "System shall trigger an escalation alert to Sales Manager if no rep activity within 24 hours",              "BR-005", <Bdg color="red">Must</Bdg>],
-                ["FR-007", "Lead Scoring",    "System shall calculate a lead score (0–100) from demographic and behavioural criteria in real time",         "BR-007", <Bdg color="red">Must</Bdg>],
-                ["FR-008", "Lead Scoring",    "System shall auto-update contact lifecycle stage to MQL when score reaches 40, SQL when score reaches 70",  "BR-007", <Bdg color="red">Must</Bdg>],
-                ["FR-009", "Pipeline",        "System shall provide a Kanban-style pipeline view showing all deals by stage",                              "BR-004", <Bdg color="red">Must</Bdg>],
-                ["FR-010", "Pipeline",        "System shall calculate a weighted forecast using deal-stage probability percentages",                        "BR-004", <Bdg color="yellow">Should</Bdg>],
-                ["FR-011", "Integration",     "System shall sync Mailchimp contact email open and click events to the HubSpot contact timeline",           "BR-006", <Bdg color="red">Must</Bdg>],
-                ["FR-012", "Integration",     "System shall push new HubSpot contacts to Mailchimp marketing lists based on lifecycle stage",              "BR-006", <Bdg color="yellow">Should</Bdg>],
-                ["FR-013", "Reporting",       "System shall auto-generate a weekly performance summary and deliver via email every Monday 08:00",           "BR-008", <Bdg color="yellow">Should</Bdg>],
-                ["FR-014", "Data Quality",    "System shall prevent duplicate contacts using email address as unique identifier at point of creation",      "BR-001", <Bdg color="red">Must</Bdg>],
-                ["FR-015", "Closed-Lost",     "System shall require a closed-lost reason selection before a deal can be moved to the Closed-Lost stage",   "BR-010", <Bdg color="yellow">Should</Bdg>],
+                ["FR-001", "Lead Capture",    "System shall auto-create a HubSpot contact on web form submission with all form fields mapped",             "BR-001", bd("red","Must")],
+                ["FR-002", "Lead Capture",    "System shall capture UTM source, medium, and campaign parameters on all inbound contacts",                  "BR-009", bd("red","Must")],
+                ["FR-003", "Assignment",      "System shall assign leads to reps based on territory (region) with round-robin fallback for same region",   "BR-002", bd("red","Must")],
+                ["FR-004", "Assignment",      "System shall send email + Slack notification to assigned rep within 5 minutes of lead creation",            "BR-002", bd("red","Must")],
+                ["FR-005", "Follow-up",       "System shall create a follow-up task for assigned rep automatically on lead creation",                      "BR-005", bd("red","Must")],
+                ["FR-006", "Follow-up",       "System shall trigger an escalation alert to Sales Manager if no rep activity within 24 hours",              "BR-005", bd("red","Must")],
+                ["FR-007", "Lead Scoring",    "System shall calculate a lead score (0–100) from demographic and behavioural criteria in real time",         "BR-007", bd("red","Must")],
+                ["FR-008", "Lead Scoring",    "System shall auto-update contact lifecycle stage to MQL when score reaches 40, SQL when score reaches 70",  "BR-007", bd("red","Must")],
+                ["FR-009", "Pipeline",        "System shall provide a Kanban-style pipeline view showing all deals by stage",                              "BR-004", bd("red","Must")],
+                ["FR-010", "Pipeline",        "System shall calculate a weighted forecast using deal-stage probability percentages",                        "BR-004", bd("yellow","Should")],
+                ["FR-011", "Integration",     "System shall sync Mailchimp contact email open and click events to the HubSpot contact timeline",           "BR-006", bd("red","Must")],
+                ["FR-012", "Integration",     "System shall push new HubSpot contacts to Mailchimp marketing lists based on lifecycle stage",              "BR-006", bd("yellow","Should")],
+                ["FR-013", "Reporting",       "System shall auto-generate a weekly performance summary and deliver via email every Monday 08:00",           "BR-008", bd("yellow","Should")],
+                ["FR-014", "Data Quality",    "System shall prevent duplicate contacts using email address as unique identifier at point of creation",      "BR-001", bd("red","Must")],
+                ["FR-015", "Closed-Lost",     "System shall require a closed-lost reason selection before a deal can be moved to the Closed-Lost stage",   "BR-010", bd("yellow","Should")],
               ]} />
             </S>
 
@@ -753,18 +757,18 @@ export default function CRMCaseStudy() {
             <S id="non-functional-req" num="17" title="Non-Functional Requirements"
               sub="Performance, security, and usability criteria that define HOW the system must behave — commonly overlooked, always critical.">
               <T hs={["ID", "Category", "Requirement", "Measurement", "Priority"]} rows={[
-                ["NFR-001", "Performance",   "HubSpot dashboard pages shall load within 3 seconds for 95% of requests",                    "Google Lighthouse / HubSpot monitoring",        <Bdg color="red">Must</Bdg>],
-                ["NFR-002", "Performance",   "Lead auto-assignment workflow shall complete within 5 minutes of form submission",            "HubSpot workflow execution log timestamp",       <Bdg color="red">Must</Bdg>],
-                ["NFR-003", "Availability",  "HubSpot platform shall maintain 99.9% uptime (per HubSpot SLA)",                            "HubSpot status page / SLA",                     <Bdg color="red">Must</Bdg>],
-                ["NFR-004", "Security",      "All user access shall require SSO via Google Workspace — no standalone passwords",           "IT audit — zero local HubSpot passwords",        <Bdg color="red">Must</Bdg>],
-                ["NFR-005", "Security",      "Contact data shall be stored in HubSpot EU data centre to comply with GDPR",                 "HubSpot account data residency setting",          <Bdg color="red">Must</Bdg>],
-                ["NFR-006", "Usability",     "New users shall be able to log a call, create a task, and update a deal stage within 15 min of first use (post-training)", "Observed during UAT user testing", <Bdg color="yellow">Should</Bdg>],
-                ["NFR-007", "Scalability",   "System shall support team growth to 30 AEs without requiring re-architecture",               "HubSpot Professional tier capacity (300 users)", <Bdg color="yellow">Should</Bdg>],
-                ["NFR-008", "Data Integrity","Deduplication rule shall prevent > 5% duplicate contacts per quarter post go-live",          "Quarterly data audit report",                    <Bdg color="red">Must</Bdg>],
+                ["NFR-001", "Performance",   "HubSpot dashboard pages shall load within 3 seconds for 95% of requests",                    "Google Lighthouse / HubSpot monitoring",        bd("red","Must")],
+                ["NFR-002", "Performance",   "Lead auto-assignment workflow shall complete within 5 minutes of form submission",            "HubSpot workflow execution log timestamp",       bd("red","Must")],
+                ["NFR-003", "Availability",  "HubSpot platform shall maintain 99.9% uptime (per HubSpot SLA)",                            "HubSpot status page / SLA",                     bd("red","Must")],
+                ["NFR-004", "Security",      "All user access shall require SSO via Google Workspace — no standalone passwords",           "IT audit — zero local HubSpot passwords",        bd("red","Must")],
+                ["NFR-005", "Security",      "Contact data shall be stored in HubSpot EU data centre to comply with GDPR",                 "HubSpot account data residency setting",          bd("red","Must")],
+                ["NFR-006", "Usability",     "New users shall be able to log a call, create a task, and update a deal stage within 15 min of first use (post-training)", "Observed during UAT user testing", bd("yellow","Should")],
+                ["NFR-007", "Scalability",   "System shall support team growth to 30 AEs without requiring re-architecture",               "HubSpot Professional tier capacity (300 users)", bd("yellow","Should")],
+                ["NFR-008", "Data Integrity","Deduplication rule shall prevent > 5% duplicate contacts per quarter post go-live",          "Quarterly data audit report",                    bd("red","Must")],
               ]} />
               <IB t="i">
                 NFR-004 and NFR-005 were non-negotiable requirements from David Chen (IT Systems Lead). SSO was required
-                as part of the company's ISO 27001 compliance programme. GDPR data residency was flagged by Legal after
+                as part of the company&apos;s ISO 27001 compliance programme. GDPR data residency was flagged by Legal after
                 the project scope review in Week 2 — added to requirements immediately.
               </IB>
             </S>
@@ -969,7 +973,7 @@ export default function CRMCaseStudy() {
 │ Assigned: A. Rivera  │  [ Log Call ]  [ Send Email ]  [ Create Deal ]
 └──────────────────────┘`}</div>
                   </div>
-                  <p className="text-[#6B7280] text-xs mt-3">Validation finding: "Create Deal" CTA was added after AE feedback in prototype session — not in v1 wireframe.</p>
+                  <p className="text-[#6B7280] text-xs mt-3">Validation finding: &ldquo;Create Deal&rdquo; CTA was added after AE feedback in prototype session — not in v1 wireframe.</p>
                 </Glass>
               </div>
             </S>
@@ -1060,7 +1064,7 @@ export default function CRMCaseStudy() {
                 I exported all Closed Won contacts, reconstructed their demographic and behavioural signals, and found
                 87% of closed-won contacts would have scored ≥ 70 under this model — validating the SQL threshold.
                 The MQL threshold of 40 was calibrated to pass approximately 35% of all inbound leads to Sales, matching
-                the team's stated capacity of ~60 SQLs/month from 180 monthly leads.
+                the team&apos;s stated capacity of ~60 SQLs/month from 180 monthly leads.
               </IB>
             </S>
 
@@ -1075,7 +1079,7 @@ export default function CRMCaseStudy() {
               <IB t="i">
                 <strong>Design decision:</strong> I recommended Power BI for the Executive Dashboard (rather than HubSpot
                 native) because James Okafor needed to overlay HubSpot pipeline data with finance data (bookings vs targets)
-                that lived in a separate Excel model. Power BI's multi-source data model was the only option that could
+                that lived in a separate Excel model. Power BI&apos;s multi-source data model was the only option that could
                 serve both datasets in a single view without manual exports.
               </IB>
             </S>
@@ -1190,14 +1194,14 @@ print(dupes.groupby('email_clean').size().describe())
             <S id="risk-assessment" num="29" title="Risk Assessment"
               sub="Risk register maintained throughout the project. Reviewed weekly in steering meetings. Ratings: Likelihood 1–5, Impact 1–5.">
               <T hs={["ID", "Risk", "L", "I", "Rating", "Mitigation", "Owner"]} rows={[
-                ["R-001", "Low user adoption — reps revert to spreadsheets",                "4","4", <Bdg color="red">16</Bdg>,    "Champions programme · training · manager enforcement · quick wins in Sprint 1",    "Sales Mgr"],
-                ["R-002", "Data quality issues during migration corrupt CRM",               "3","5", <Bdg color="red">15</Bdg>,    "Data cleanse sprint before migration · duplicate audit · mandatory field validation","BA + IT Lead"],
-                ["R-003", "Mailchimp ↔ HubSpot integration fails in production",           "3","4", <Bdg color="yellow">12</Bdg>,  "Full integration test in HubSpot sandbox · rollback plan documented",              "IT Lead"],
-                ["R-004", "Scope creep inflates Sprint 2 & 3 beyond capacity",             "4","3", <Bdg color="yellow">12</Bdg>,  "MoSCoW signed off in week 4 · change control process enforced by BA",             "BA / PO"],
-                ["R-005", "Key stakeholder unavailable during critical phases",             "2","4", <Bdg color="orange">8</Bdg>,   "Deputy sign-off authority defined in RACI · decisions documented in Confluence",   "BA"],
-                ["R-006", "HubSpot configuration does not support required scoring logic",  "2","4", <Bdg color="orange">8</Bdg>,   "PoC of scoring model built in sandbox before Sprint 1 commitment",                "Dev + BA"],
-                ["R-007", "Lead assignment rules fail for edge cases (e.g. APAC leaves)",  "3","2", <Bdg color="green">6</Bdg>,    "All territory edge cases documented; fallback rule: assign to Sales Manager",      "Dev"],
-                ["R-008", "Power BI data refresh delay exceeds 15-minute SLA",             "2","3", <Bdg color="green">6</Bdg>,    "HubSpot API rate limits reviewed; incremental refresh configured",                 "IT Lead"],
+                ["R-001", "Low user adoption — reps revert to spreadsheets",                "4","4", bd("red","16"),    "Champions programme · training · manager enforcement · quick wins in Sprint 1",    "Sales Mgr"],
+                ["R-002", "Data quality issues during migration corrupt CRM",               "3","5", bd("red","15"),    "Data cleanse sprint before migration · duplicate audit · mandatory field validation","BA + IT Lead"],
+                ["R-003", "Mailchimp ↔ HubSpot integration fails in production",           "3","4", bd("yellow","12"),  "Full integration test in HubSpot sandbox · rollback plan documented",              "IT Lead"],
+                ["R-004", "Scope creep inflates Sprint 2 & 3 beyond capacity",             "4","3", bd("yellow","12"),  "MoSCoW signed off in week 4 · change control process enforced by BA",             "BA / PO"],
+                ["R-005", "Key stakeholder unavailable during critical phases",             "2","4", bd("orange","8"),   "Deputy sign-off authority defined in RACI · decisions documented in Confluence",   "BA"],
+                ["R-006", "HubSpot configuration does not support required scoring logic",  "2","4", bd("orange","8"),   "PoC of scoring model built in sandbox before Sprint 1 commitment",                "Dev + BA"],
+                ["R-007", "Lead assignment rules fail for edge cases (e.g. APAC leaves)",  "3","2", bd("green","6"),    "All territory edge cases documented; fallback rule: assign to Sales Manager",      "Dev"],
+                ["R-008", "Power BI data refresh delay exceeds 15-minute SLA",             "2","3", bd("green","6"),    "HubSpot API rate limits reviewed; incremental refresh configured",                 "IT Lead"],
               ]} />
               <IB t="w">
                 <strong>R-001 materialised partially:</strong> Two AEs continued using personal notes for the first
@@ -1269,21 +1273,21 @@ print(dupes.groupby('email_clean').size().describe())
             <S id="product-backlog" num="32" title="Product Backlog"
               sub="47 stories managed in Jira. Top 15 highest-priority backlog items shown, reflecting the Must Have and Should Have scope.">
               <T hs={["ID", "Story Title", "Epic", "Points", "Sprint", "Priority", "Status"]} rows={[
-                ["US-001", "Auto-create HubSpot contact on form submission",        "Lead Capture",   "5",  "S1", <Bdg color="red">Must</Bdg>,    <Bdg color="green">Done</Bdg>],
-                ["US-002", "Slack notification on lead assignment",                  "Lead Capture",   "8",  "S1", <Bdg color="red">Must</Bdg>,    <Bdg color="green">Done</Bdg>],
-                ["US-003", "Territory-based auto-assignment with round-robin",       "Lead Capture",   "5",  "S1", <Bdg color="red">Must</Bdg>,    <Bdg color="green">Done</Bdg>],
-                ["US-004", "Deduplication on email at point of contact creation",   "Lead Capture",   "3",  "S1", <Bdg color="red">Must</Bdg>,    <Bdg color="green">Done</Bdg>],
-                ["US-005", "UTM source/medium/campaign auto-capture",               "Lead Capture",   "3",  "S1", <Bdg color="red">Must</Bdg>,    <Bdg color="green">Done</Bdg>],
-                ["US-010", "Lead score visible on contact record (real-time)",      "Lead Scoring",   "8",  "S2", <Bdg color="red">Must</Bdg>,    <Bdg color="green">Done</Bdg>],
-                ["US-011", "Auto lifecycle stage change at score 40 (MQL) / 70 (SQL)","Lead Scoring", "5",  "S2", <Bdg color="red">Must</Bdg>,    <Bdg color="green">Done</Bdg>],
-                ["US-020", "Auto follow-up task on lead assignment",                "Follow-up",      "8",  "S2", <Bdg color="red">Must</Bdg>,    <Bdg color="green">Done</Bdg>],
-                ["US-021", "24-hr escalation alert to Sales Manager",               "Follow-up",      "5",  "S2", <Bdg color="red">Must</Bdg>,    <Bdg color="green">Done</Bdg>],
-                ["US-022", "One-click call outcome logging",                        "Follow-up",      "3",  "S2", <Bdg color="red">Must</Bdg>,    <Bdg color="green">Done</Bdg>],
-                ["US-026", "Mailchimp email engagement sync to HubSpot timeline",   "Integration",    "8",  "S2", <Bdg color="red">Must</Bdg>,    <Bdg color="green">Done</Bdg>],
-                ["US-030", "Power BI executive pipeline dashboard",                 "Reporting",      "13", "S3", <Bdg color="red">Must</Bdg>,    <Bdg color="green">Done</Bdg>],
-                ["US-031", "Automated weekly email report (Monday 08:00)",          "Reporting",      "5",  "S3", <Bdg color="yellow">Should</Bdg>,<Bdg color="green">Done</Bdg>],
-                ["US-032", "Lead source attribution dashboard",                     "Reporting",      "8",  "S3", <Bdg color="yellow">Should</Bdg>,<Bdg color="green">Done</Bdg>],
-                ["US-015", "Closed-lost reason mandatory field",                    "Deal Mgmt",      "3",  "S3", <Bdg color="yellow">Should</Bdg>,<Bdg color="green">Done</Bdg>],
+                ["US-001", "Auto-create HubSpot contact on form submission",        "Lead Capture",   "5",  "S1", bd("red","Must"),    bd("green","Done")],
+                ["US-002", "Slack notification on lead assignment",                  "Lead Capture",   "8",  "S1", bd("red","Must"),    bd("green","Done")],
+                ["US-003", "Territory-based auto-assignment with round-robin",       "Lead Capture",   "5",  "S1", bd("red","Must"),    bd("green","Done")],
+                ["US-004", "Deduplication on email at point of contact creation",   "Lead Capture",   "3",  "S1", bd("red","Must"),    bd("green","Done")],
+                ["US-005", "UTM source/medium/campaign auto-capture",               "Lead Capture",   "3",  "S1", bd("red","Must"),    bd("green","Done")],
+                ["US-010", "Lead score visible on contact record (real-time)",      "Lead Scoring",   "8",  "S2", bd("red","Must"),    bd("green","Done")],
+                ["US-011", "Auto lifecycle stage change at score 40 (MQL) / 70 (SQL)","Lead Scoring", "5",  "S2", bd("red","Must"),    bd("green","Done")],
+                ["US-020", "Auto follow-up task on lead assignment",                "Follow-up",      "8",  "S2", bd("red","Must"),    bd("green","Done")],
+                ["US-021", "24-hr escalation alert to Sales Manager",               "Follow-up",      "5",  "S2", bd("red","Must"),    bd("green","Done")],
+                ["US-022", "One-click call outcome logging",                        "Follow-up",      "3",  "S2", bd("red","Must"),    bd("green","Done")],
+                ["US-026", "Mailchimp email engagement sync to HubSpot timeline",   "Integration",    "8",  "S2", bd("red","Must"),    bd("green","Done")],
+                ["US-030", "Power BI executive pipeline dashboard",                 "Reporting",      "13", "S3", bd("red","Must"),    bd("green","Done")],
+                ["US-031", "Automated weekly email report (Monday 08:00)",          "Reporting",      "5",  "S3", bd("yellow","Should"),bd("green","Done")],
+                ["US-032", "Lead source attribution dashboard",                     "Reporting",      "8",  "S3", bd("yellow","Should"),bd("green","Done")],
+                ["US-015", "Closed-lost reason mandatory field",                    "Deal Mgmt",      "3",  "S3", bd("yellow","Should"),bd("green","Done")],
               ]} />
             </S>
 
@@ -1312,27 +1316,27 @@ print(dupes.groupby('email_clean').size().describe())
                   "HubSpot form live on test website",
                   "1. Submit test form with valid data 2. Check HubSpot contacts within 5 min",
                   "New contact created with all fields populated; no duplicates; UTM fields captured",
-                  <Bdg color="red">P1</Bdg>],
+                  bd("red","P1")],
                 ["TC-012", "Escalation fires after 24 hrs no activity",
                   "Lead assigned to test AE; no activity logged",
                   "1. Assign lead 2. Wait 25 hrs (simulate via workflow trigger) 3. Check Sales Mgr email",
                   "Sales Manager receives escalation email with lead name, assigned rep, and HubSpot link",
-                  <Bdg color="red">P1</Bdg>],
+                  bd("red","P1")],
                 ["TC-025", "Lead score updates on email open",
                   "Contact exists in HubSpot; linked to Mailchimp list",
                   "1. Send test email from Mailchimp 2. Open email in test inbox 3. Wait for sync (up to 10 min) 4. Check contact score in HubSpot",
                   "Score increases by +5 pts; email open event appears on contact timeline",
-                  <Bdg color="yellow">P2</Bdg>],
+                  bd("yellow","P2")],
                 ["TC-041", "Power BI dashboard reflects new deal within 15 min",
                   "Power BI connected to HubSpot via API; dashboard open",
                   "1. Create a new deal in HubSpot for £45,000 2. Start timer 3. Refresh Power BI dashboard",
                   "Deal appears on dashboard within 15 minutes; pipeline total updates correctly",
-                  <Bdg color="yellow">P2</Bdg>],
+                  bd("yellow","P2")],
                 ["TC-058", "Duplicate contact prevented on form re-submission",
                   "Contact with email test@acme.com already exists in HubSpot",
                   "1. Submit web form using email test@acme.com 2. Check HubSpot contacts",
                   "No new contact created; existing contact updated; no duplicate record in database",
-                  <Bdg color="red">P1</Bdg>],
+                  bd("red","P1")],
               ]} />
             </S>
 
@@ -1340,11 +1344,11 @@ print(dupes.groupby('email_clean').size().describe())
             <S id="defect-management" num="35" title="Defect Management"
               sub="9 defects raised during UAT. All P1 and P2 defects resolved before go-live sign-off. Log extract shown below.">
               <T hs={["ID", "Defect", "Priority", "Root Cause", "Resolution", "Status"]} rows={[
-                ["DEF-001", "Lead score not updating when Mailchimp email is opened", <Bdg color="red">P1</Bdg>,    "Mailchimp webhook not sending 'email_open' event to HubSpot due to misconfigured API key scope", "Updated Mailchimp API key with 'reports:read' scope; re-tested successfully", <Bdg color="green">Closed</Bdg>],
-                ["DEF-002", "Round-robin assignment skipping Rep 3 consistently",     <Bdg color="red">P1</Bdg>,    "HubSpot workflow 'rotate' action not resetting counter after rep 2; off-by-one in config",        "Workflow reconfigured with explicit counter reset; 50 test leads distributed evenly",             <Bdg color="green">Closed</Bdg>],
-                ["DEF-003", "Power BI pipeline total 3.2% below HubSpot total",       <Bdg color="yellow">P2</Bdg>, "Deals in 'Closed Won' stage excluded from Power BI query due to filter error",                    "DAX measure updated to include all deal stages; totals now match within 0.01%",                   <Bdg color="green">Closed</Bdg>],
-                ["DEF-004", "Escalation email not firing for APAC time zone leads",   <Bdg color="yellow">P2</Bdg>, "Workflow trigger using static 24-hr delay based on UK time; APAC leads outside business hours", "Workflow updated to use business-hours-aware delay; APAC rep confirmed receipt in test",          <Bdg color="green">Closed</Bdg>],
-                ["DEF-005", "Company size field blank for Mailchimp-sourced contacts", <Bdg color="orange">P3</Bdg>,"Mailchimp integration mapping missing 'company_size' field from form submission payload",         "Mailchimp form updated to capture company size; mapping added in HubSpot integration settings",   <Bdg color="green">Closed</Bdg>],
+                ["DEF-001", "Lead score not updating when Mailchimp email is opened", bd("red","P1"),    "Mailchimp webhook not sending 'email_open' event to HubSpot due to misconfigured API key scope", "Updated Mailchimp API key with 'reports:read' scope; re-tested successfully", bd("green","Closed")],
+                ["DEF-002", "Round-robin assignment skipping Rep 3 consistently",     bd("red","P1"),    "HubSpot workflow 'rotate' action not resetting counter after rep 2; off-by-one in config",        "Workflow reconfigured with explicit counter reset; 50 test leads distributed evenly",             bd("green","Closed")],
+                ["DEF-003", "Power BI pipeline total 3.2% below HubSpot total",       bd("yellow","P2"), "Deals in 'Closed Won' stage excluded from Power BI query due to filter error",                    "DAX measure updated to include all deal stages; totals now match within 0.01%",                   bd("green","Closed")],
+                ["DEF-004", "Escalation email not firing for APAC time zone leads",   bd("yellow","P2"), "Workflow trigger using static 24-hr delay based on UK time; APAC leads outside business hours", "Workflow updated to use business-hours-aware delay; APAC rep confirmed receipt in test",          bd("green","Closed")],
+                ["DEF-005", "Company size field blank for Mailchimp-sourced contacts", bd("orange","P3"),"Mailchimp integration mapping missing 'company_size' field from form submission payload",         "Mailchimp form updated to capture company size; mapping added in HubSpot integration settings",   bd("green","Closed")],
               ]} />
               <IB t="s">
                 UAT exit criteria met on June 28 — 2 days before planned sign-off deadline.
@@ -1401,14 +1405,14 @@ print(dupes.groupby('email_clean').size().describe())
             <S id="pir" num="39" title="Post-Implementation Review"
               sub="Conducted at Week 14 (July 12). Reviewed all 8 success metrics. Findings shared with full project team and CEO.">
               <T hs={["Goal", "Metric", "Baseline", "Target", "Actual (Wk 14)", "Status"]} rows={[
-                ["G1 — Single source of truth",           "% leads in CRM",              "0%",     "100%",    "100%",     <Bdg color="green">Met</Bdg>],
-                ["G2 — Reduce response time",             "Avg hrs to first contact",    "52 hrs", "< 2 hrs", "4.2 hrs",  <Bdg color="yellow">Partial</Bdg>],
-                ["G3 — Improve conversion rate",          "Lead → Opportunity %",        "18%",    "> 25%",   "31%",      <Bdg color="green">Exceeded</Bdg>],
-                ["G4 — Automate follow-ups",              "% follow-ups auto-triggered", "0%",     "> 90%",   "94%",      <Bdg color="green">Exceeded</Bdg>],
-                ["G5 — Reduce duplicates",                "Duplicates / quarter",        "~200",   "< 30",    "12",       <Bdg color="green">Exceeded</Bdg>],
-                ["G6 — Real-time pipeline visibility",    "Dashboard availability",      "None",   "Live",    "✓ Live",   <Bdg color="green">Met</Bdg>],
-                ["G7 — Reduce reporting effort",          "Manual hrs/week",             "6–8 hrs","< 1 hr",  "45 min",   <Bdg color="green">Exceeded</Bdg>],
-                ["G8 — Improve forecast accuracy",        "Forecast vs actual variance", "Unknown","< 15%",   "11%",      <Bdg color="green">Met</Bdg>],
+                ["G1 — Single source of truth",           "% leads in CRM",              "0%",     "100%",    "100%",     bd("green","Met")],
+                ["G2 — Reduce response time",             "Avg hrs to first contact",    "52 hrs", "< 2 hrs", "4.2 hrs",  bd("yellow","Partial")],
+                ["G3 — Improve conversion rate",          "Lead → Opportunity %",        "18%",    "> 25%",   "31%",      bd("green","Exceeded")],
+                ["G4 — Automate follow-ups",              "% follow-ups auto-triggered", "0%",     "> 90%",   "94%",      bd("green","Exceeded")],
+                ["G5 — Reduce duplicates",                "Duplicates / quarter",        "~200",   "< 30",    "12",       bd("green","Exceeded")],
+                ["G6 — Real-time pipeline visibility",    "Dashboard availability",      "None",   "Live",    "✓ Live",   bd("green","Met")],
+                ["G7 — Reduce reporting effort",          "Manual hrs/week",             "6–8 hrs","< 1 hr",  "45 min",   bd("green","Exceeded")],
+                ["G8 — Improve forecast accuracy",        "Forecast vs actual variance", "Unknown","< 15%",   "11%",      bd("green","Met")],
               ]} />
               <IB t="w">
                 <strong>G2 — Partially Met:</strong> The 4.2-hour average response time exceeded the 2-hour target.
@@ -1437,18 +1441,18 @@ print(dupes.groupby('email_clean').size().describe())
             {/* 41 Before vs After */}
             <S id="before-after" num="41" title="Before vs After Comparison">
               <T hs={["Area", "Before (AS-IS)", "After (TO-BE)", "Change"]} rows={[
-                ["Lead System",          "4 disconnected Google Sheets",                    "Single HubSpot CRM — 1 source of truth",          <Bdg color="green">Eliminated</Bdg>],
-                ["Lead Assignment",      "Manual Slack DM — avg 52-hr delay",               "Auto-assign — < 5 min, zero manual action",       <Bdg color="green">−92% time</Bdg>],
-                ["Lead Scoring",         "None — all leads treated equally",                "Real-time 100-pt score — MQL at 40, SQL at 70",   <Bdg color="green">New capability</Bdg>],
-                ["Follow-up Automation", "Personal calendars — 35% missed",                 "Auto-task + 24-hr escalation — 3% missed",        <Bdg color="green">−91% miss rate</Bdg>],
-                ["Email Integration",    "No visibility of email engagement in sales flow", "Mailchimp sync — all opens/clicks in CRM timeline",<Bdg color="green">New capability</Bdg>],
-                ["Pipeline Visibility",  "Weekly manual report (Friday PM build)",          "Real-time HubSpot + Power BI dashboard (live)",   <Bdg color="green">Real-time</Bdg>],
-                ["Reporting Time",       "6–8 hrs/week — Sales Manager manual build",       "45 min/week — auto-generated Monday 08:00",       <Bdg color="green">−88% effort</Bdg>],
-                ["Duplicates/Quarter",   "~200 duplicate records",                          "~12 duplicate records",                           <Bdg color="green">−94%</Bdg>],
-                ["Conversion Rate",      "18% lead-to-opportunity",                         "31% lead-to-opportunity",                         <Bdg color="green">+72%</Bdg>],
-                ["Sales Cycle",          "68 days average",                                 "54 days average",                                 <Bdg color="green">−21%</Bdg>],
-                ["Forecast Accuracy",    "Unknown / manually estimated",                    "11% variance vs actuals",                         <Bdg color="green">Measurable</Bdg>],
-                ["CRM Adoption",         "0% (no CRM)",                                     "100% at Month 2",                                 <Bdg color="green">Full adoption</Bdg>],
+                ["Lead System",          "4 disconnected Google Sheets",                    "Single HubSpot CRM — 1 source of truth",          bd("green","Eliminated")],
+                ["Lead Assignment",      "Manual Slack DM — avg 52-hr delay",               "Auto-assign — < 5 min, zero manual action",       bd("green","−92% time")],
+                ["Lead Scoring",         "None — all leads treated equally",                "Real-time 100-pt score — MQL at 40, SQL at 70",   bd("green","New capability")],
+                ["Follow-up Automation", "Personal calendars — 35% missed",                 "Auto-task + 24-hr escalation — 3% missed",        bd("green","−91% miss rate")],
+                ["Email Integration",    "No visibility of email engagement in sales flow", "Mailchimp sync — all opens/clicks in CRM timeline",bd("green","New capability")],
+                ["Pipeline Visibility",  "Weekly manual report (Friday PM build)",          "Real-time HubSpot + Power BI dashboard (live)",   bd("green","Real-time")],
+                ["Reporting Time",       "6–8 hrs/week — Sales Manager manual build",       "45 min/week — auto-generated Monday 08:00",       bd("green","−88% effort")],
+                ["Duplicates/Quarter",   "~200 duplicate records",                          "~12 duplicate records",                           bd("green","−94%")],
+                ["Conversion Rate",      "18% lead-to-opportunity",                         "31% lead-to-opportunity",                         bd("green","+72%")],
+                ["Sales Cycle",          "68 days average",                                 "54 days average",                                 bd("green","−21%")],
+                ["Forecast Accuracy",    "Unknown / manually estimated",                    "11% variance vs actuals",                         bd("green","Measurable")],
+                ["CRM Adoption",         "0% (no CRM)",                                     "100% at Month 2",                                 bd("green","Full adoption")],
               ]} />
             </S>
 
@@ -1486,7 +1490,7 @@ print(dupes.groupby('email_clean').size().describe())
                   { cat: "Scope",        c: "#F59E0B",  lesson: "Three scope-creep requests were received during Sprint 2 (finance integration, AI call summaries, multi-currency). The MoSCoW document signed in Week 4 made deflecting these straightforward — it gave the BA authority to say no with evidence." },
                   { cat: "Stakeholders", c: "#60A5FA",  lesson: "The CEO was a High Power / Low Interest stakeholder. Monthly briefings were sufficient until Week 11, when board prep elevated his involvement. Stakeholder interest levels are dynamic — review the register monthly, not just at project start." },
                   { cat: "Testing",      c: "#F87171",  lesson: "DEF-001 (Mailchimp API key scope error) was not caught in dev testing because the dev environment used a different API key. Ensure test environment credentials precisely mirror production scope before UAT begins." },
-                ].map(({ cat, c, lesson }, i) => (
+                ].map(({ cat, lesson }, i) => (
                   <div key={i} className="flex gap-4 p-4 rounded-xl bg-white/[0.02] border border-white/[0.05]">
                     <Bdg color={cat === "Requirements" ? "blue" : cat === "Change Mgmt" ? "purple" : cat === "Data Quality" ? "green" : cat === "Scope" ? "yellow" : cat === "Stakeholders" ? "blue" : "red"}>
                       {cat}

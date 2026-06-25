@@ -3,8 +3,6 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import {
   ArrowLeft, ArrowRight, CheckCircle2, AlertTriangle, Info,
-  Bot, Users, Target, BarChart3, MessageSquare, Zap,
-  FileText, TestTube2, Rocket, Clock, Shield, RefreshCw, Award,
 } from "lucide-react";
 
 const toc = [
@@ -122,6 +120,11 @@ function Glass({ children, className = "" }: { children: React.ReactNode; classN
   return <div className={`glass rounded-2xl p-6 ${className}`}>{children}</div>;
 }
 
+// Helper to avoid jsx-key errors when Bdg is used inside array literals
+function bd(color: string, text: string): React.ReactNode {
+  return <Bdg color={color}>{text}</Bdg>;
+}
+
 export default function AISupportCaseStudy() {
   const [active, setActive] = useState("executive-summary");
 
@@ -203,7 +206,7 @@ export default function AISupportCaseStudy() {
             <S id="executive-summary" num="01" title="Executive Summary">
               <p className="text-[#9CA3AF] leading-relaxed">
                 UrbanCart, a B2C e-commerce platform processing <span className="text-[#F9FAFB] font-medium">50,000 orders per month</span>,
-                was struggling with a support operation that couldn't scale. Five agents were handling 2,400 tickets per month —
+                was struggling with a support operation that couldn&apos;t scale. Five agents were handling 2,400 tickets per month —
                 68% of which were identical, low-complexity queries (order status, returns, password resets). Average first response
                 time had reached 18 hours, and CSAT had dropped to 61%.
               </p>
@@ -285,7 +288,7 @@ export default function AISupportCaseStudy() {
             <S id="business-problem" num="03" title="Business Problem"
               sub="What was breaking, why it mattered commercially, and what the cost of inaction was.">
               <p className="text-[#9CA3AF] leading-relaxed">
-                UrbanCart's support team was receiving <span className="text-[#F9FAFB] font-medium">2,400 tickets per month</span> — a
+                UrbanCart&apos;s support team was receiving <span className="text-[#F9FAFB] font-medium">2,400 tickets per month</span> — a
                 volume that had grown 80% over 18 months as the platform scaled, but headcount had only grown from 3 to 5 agents.
                 After auditing 3 months of ticket data, I found that <strong className="text-[#F9FAFB]">68% of all tickets fell into
                 just 6 repeatable categories</strong> that required no judgment: order status, return initiation, refund tracking,
@@ -304,7 +307,7 @@ export default function AISupportCaseStudy() {
                 <MC v="61%" label="CSAT Score" c="#EF4444" note="Down from 74% 12 months prior" />
               </div>
               <IB t="w">
-                <strong>Commercial trigger:</strong> UrbanCart's Head of Operations flagged support costs at a quarterly board review.
+                <strong>Commercial trigger:</strong> UrbanCart&apos;s Head of Operations flagged support costs at a quarterly board review.
                 The CFO calculated that at the current growth trajectory, a 6th agent would need to be hired within 3 months — costing
                 £38K/year — unless a scalable solution was found. This project was approved within two weeks of that meeting.
               </IB>
@@ -314,11 +317,11 @@ export default function AISupportCaseStudy() {
             <S id="stakeholders" num="04" title="Stakeholder Analysis"
               sub="Who I engaged, their stake in the outcome, and how I managed each relationship.">
               <T hs={["Name / Role", "Power", "Interest", "Primary Concern", "My Engagement Approach"]} rows={[
-                ["Sarah Yates — Head of Operations",    <Bdg color="red">High</Bdg>,    <Bdg color="red">High</Bdg>,    "Cost reduction + scalability",              "Weekly steering meetings; project sponsor; sign-off authority"],
-                ["Dev Patel — Support Team Lead",       <Bdg color="yellow">Med</Bdg>,  <Bdg color="red">High</Bdg>,    "Agents losing their jobs to automation",    "Involved from Day 1; co-designed escalation rules; UAT champion"],
-                ["3 Support Agents (interviewed)",      <Bdg color="green">Low</Bdg>,   <Bdg color="red">High</Bdg>,    "Job security, ease of use post-go-live",    "Individual interviews; daily stand-ups during UAT"],
-                ["Raj Nair — CTO",                      <Bdg color="red">High</Bdg>,    <Bdg color="yellow">Med</Bdg>,  "Data security, Zendesk integration quality","Architecture review in Wk 2; monthly update"],
-                ["Amit Shah — CFO",                     <Bdg color="red">High</Bdg>,    <Bdg color="green">Low</Bdg>,   "ROI justification, cost per ticket",        "ROI model shared in Wk 1; monthly exec briefing"],
+                ["Sarah Yates — Head of Operations",    bd("red","High"),    bd("red","High"),    "Cost reduction + scalability",              "Weekly steering meetings; project sponsor; sign-off authority"],
+                ["Dev Patel — Support Team Lead",       bd("yellow","Med"),  bd("red","High"),    "Agents losing their jobs to automation",    "Involved from Day 1; co-designed escalation rules; UAT champion"],
+                ["3 Support Agents (interviewed)",      bd("green","Low"),   bd("red","High"),    "Job security, ease of use post-go-live",    "Individual interviews; daily stand-ups during UAT"],
+                ["Raj Nair — CTO",                      bd("red","High"),    bd("yellow","Med"),  "Data security, Zendesk integration quality","Architecture review in Wk 2; monthly update"],
+                ["Amit Shah — CFO",                     bd("red","High"),    bd("green","Low"),   "ROI justification, cost per ticket",        "ROI model shared in Wk 1; monthly exec briefing"],
               ]} />
               <IB t="i">
                 <strong>Resistance risk managed early:</strong> Dev Patel (Support Team Lead) was initially resistant — fearing
@@ -405,14 +408,14 @@ export default function AISupportCaseStudy() {
             <S id="gap-analysis" num="08" title="Gap Analysis"
               sub="Current capability vs required capability — used to define the project scope precisely.">
               <T hs={["Capability", "Current State", "Required State", "Gap", "Priority"]} rows={[
-                ["Tier-1 Query Resolution",  "Manual agent response",               "Bot auto-resolves with order data lookup",    "Critical", <Bdg color="red">Must</Bdg>],
-                ["Ticket Routing",           "Manual (agents pick from queue)",      "Rules-based auto-routing by category",        "High",     <Bdg color="red">Must</Bdg>],
-                ["First Response",           "18-hour average wait",                 "Bot instant reply < 30 seconds",             "Critical", <Bdg color="red">Must</Bdg>],
-                ["Escalation to Human",      "Customer replies repeatedly until seen","One-click escalation from bot to live agent","High",     <Bdg color="red">Must</Bdg>],
-                ["Knowledge Base",           "None — all in agents' heads",          "18 structured FAQ articles powering the bot","High",     <Bdg color="red">Must</Bdg>],
-                ["CSAT Reporting",           "Manual weekly export (3 hrs)",          "Live Zendesk dashboard (automated)",         "Medium",   <Bdg color="yellow">Should</Bdg>],
-                ["Shopify Order Integration","Manual agent lookup in separate tab",   "Order data surfaced in Zendesk sidebar",     "High",     <Bdg color="red">Must</Bdg>],
-                ["Out-of-Hours Coverage",    "0% — tickets queue until next morning", "Bot handles Tier-1 24/7 including weekends", "High",     <Bdg color="red">Must</Bdg>],
+                ["Tier-1 Query Resolution",  "Manual agent response",               "Bot auto-resolves with order data lookup",    "Critical", bd("red","Must")],
+                ["Ticket Routing",           "Manual (agents pick from queue)",      "Rules-based auto-routing by category",        "High",     bd("red","Must")],
+                ["First Response",           "18-hour average wait",                 "Bot instant reply < 30 seconds",             "Critical", bd("red","Must")],
+                ["Escalation to Human",      "Customer replies repeatedly until seen","One-click escalation from bot to live agent","High",     bd("red","Must")],
+                ["Knowledge Base",           "None — all in agents' heads",          "18 structured FAQ articles powering the bot","High",     bd("red","Must")],
+                ["CSAT Reporting",           "Manual weekly export (3 hrs)",          "Live Zendesk dashboard (automated)",         "Medium",   bd("yellow","Should")],
+                ["Shopify Order Integration","Manual agent lookup in separate tab",   "Order data surfaced in Zendesk sidebar",     "High",     bd("red","Must")],
+                ["Out-of-Hours Coverage",    "0% — tickets queue until next morning", "Bot handles Tier-1 24/7 including weekends", "High",     bd("red","Must")],
               ]} />
             </S>
 
@@ -460,16 +463,16 @@ export default function AISupportCaseStudy() {
                 on customer impact risk and complaint escalation history.
               </p>
               <T hs={["Intent / Category", "Bot Handles?", "Reasoning", "Volume Share"]} rows={[
-                ["Order status & tracking",          <Bdg color="green">✓ Automated</Bdg>,  "Fully formulaic — pull from Shopify, reply with status + tracking link",         "28%"],
-                ["Return initiation",                <Bdg color="green">✓ Automated</Bdg>,  "Rule-based eligibility check + generate return label",                           "14%"],
-                ["Refund status update",             <Bdg color="green">✓ Automated</Bdg>,  "Look up refund record, return status + estimated date",                          "11%"],
-                ["Password reset",                   <Bdg color="green">✓ Automated</Bdg>,  "Trigger account reset email via Shopify API",                                    "8%"],
-                ["Discount code issues",             <Bdg color="green">✓ Automated</Bdg>,  "Validate code, identify reason for failure, offer resolution options",           "5%"],
-                ["Address change (pre-dispatch)",    <Bdg color="green">✓ Automated</Bdg>,  "Check dispatch status; update if pre-dispatch, escalate if dispatched",          "2%"],
-                ["Billing disputes",                 <Bdg color="red">✗ Human only</Bdg>,   "Risk of incorrect resolution causing chargebacks — needs human judgment",         "14%"],
-                ["Complaints / negative sentiment",  <Bdg color="red">✗ Human only</Bdg>,   "Bot escalation trigger: keywords detected (angry, terrible, complaint etc.)",     "10%"],
-                ["Complex order issues (multi-item)",<Bdg color="red">✗ Human only</Bdg>,   "Too many edge cases; wrong resolution more damaging than a 2-hr wait",           "5%"],
-                ["Account suspension / fraud flags", <Bdg color="red">✗ Human only</Bdg>,   "Legal and security sensitivity; zero tolerance for automated error",              "3%"],
+                ["Order status & tracking",          bd("green","✓ Automated"),  "Fully formulaic — pull from Shopify, reply with status + tracking link",         "28%"],
+                ["Return initiation",                bd("green","✓ Automated"),  "Rule-based eligibility check + generate return label",                           "14%"],
+                ["Refund status update",             bd("green","✓ Automated"),  "Look up refund record, return status + estimated date",                          "11%"],
+                ["Password reset",                   bd("green","✓ Automated"),  "Trigger account reset email via Shopify API",                                    "8%"],
+                ["Discount code issues",             bd("green","✓ Automated"),  "Validate code, identify reason for failure, offer resolution options",           "5%"],
+                ["Address change (pre-dispatch)",    bd("green","✓ Automated"),  "Check dispatch status; update if pre-dispatch, escalate if dispatched",          "2%"],
+                ["Billing disputes",                 bd("red","✗ Human only"),   "Risk of incorrect resolution causing chargebacks — needs human judgment",         "14%"],
+                ["Complaints / negative sentiment",  bd("red","✗ Human only"),   "Bot escalation trigger: keywords detected (angry, terrible, complaint etc.)",     "10%"],
+                ["Complex order issues (multi-item)",bd("red","✗ Human only"),   "Too many edge cases; wrong resolution more damaging than a 2-hr wait",           "5%"],
+                ["Account suspension / fraud flags", bd("red","✗ Human only"),   "Legal and security sensitivity; zero tolerance for automated error",              "3%"],
               ]} />
               <IB t="s">
                 <strong>Design principle I established:</strong> &quot;If getting this wrong costs more than the delay of waiting
@@ -481,15 +484,15 @@ export default function AISupportCaseStudy() {
             <S id="brd" num="11" title="Business Requirements"
               sub="Core requirements from the BRD — agreed and signed off by Head of Operations and CTO before build began.">
               <T hs={["ID", "Priority", "Requirement", "Acceptance Criterion"]} rows={[
-                ["BR-001", <Bdg color="red">Must</Bdg>,    "Bot shall automatically resolve Tier-1 queries (6 defined intents) without agent involvement",        "≥ 65% of all tickets closed by bot; zero agent action required"],
-                ["BR-002", <Bdg color="red">Must</Bdg>,    "Bot shall respond to any inbound customer message within 30 seconds, 24 hours a day, 7 days a week",  "Response timestamp < 30 sec from ticket creation across all hours"],
-                ["BR-003", <Bdg color="red">Must</Bdg>,    "Bot shall surface Shopify order data in responses without the customer needing to repeat order details","Order number, status, and tracking link present in bot reply"],
-                ["BR-004", <Bdg color="red">Must</Bdg>,    "Bot shall detect negative sentiment and escalate to a human agent within 1 message",                   "Sentiment keywords trigger immediate human routing — tested in UAT"],
-                ["BR-005", <Bdg color="red">Must</Bdg>,    "Customer shall be able to reach a human agent in 1 click at any point in a bot conversation",          "Escalation option visible in every bot message; tested in UAT"],
-                ["BR-006", <Bdg color="red">Must</Bdg>,    "When escalating, bot shall pass full conversation transcript and order context to the agent",           "Agent receives complete context before sending first reply"],
-                ["BR-007", <Bdg color="yellow">Should</Bdg>,"Zendesk dashboard shall display live automation rate, CSAT, and ticket volume — updated in real time", "Dashboard loads in < 3 seconds; CSAT data < 1 hr lag"],
-                ["BR-008", <Bdg color="yellow">Should</Bdg>,"Bot shall support self-service return label generation with eligibility check (within return window)",  "Return label emailed to customer within 2 minutes of request"],
-                ["BR-009", <Bdg color="orange">Could</Bdg>, "Bot shall identify and suggest upsell or replacement products where relevant (Phase 2)",               "Out of scope Phase 1 — documented in backlog for Phase 2"],
+                ["BR-001", bd("red","Must"),    "Bot shall automatically resolve Tier-1 queries (6 defined intents) without agent involvement",        "≥ 65% of all tickets closed by bot; zero agent action required"],
+                ["BR-002", bd("red","Must"),    "Bot shall respond to any inbound customer message within 30 seconds, 24 hours a day, 7 days a week",  "Response timestamp < 30 sec from ticket creation across all hours"],
+                ["BR-003", bd("red","Must"),    "Bot shall surface Shopify order data in responses without the customer needing to repeat order details","Order number, status, and tracking link present in bot reply"],
+                ["BR-004", bd("red","Must"),    "Bot shall detect negative sentiment and escalate to a human agent within 1 message",                   "Sentiment keywords trigger immediate human routing — tested in UAT"],
+                ["BR-005", bd("red","Must"),    "Customer shall be able to reach a human agent in 1 click at any point in a bot conversation",          "Escalation option visible in every bot message; tested in UAT"],
+                ["BR-006", bd("red","Must"),    "When escalating, bot shall pass full conversation transcript and order context to the agent",           "Agent receives complete context before sending first reply"],
+                ["BR-007", bd("yellow","Should"),"Zendesk dashboard shall display live automation rate, CSAT, and ticket volume — updated in real time", "Dashboard loads in < 3 seconds; CSAT data < 1 hr lag"],
+                ["BR-008", bd("yellow","Should"),"Bot shall support self-service return label generation with eligibility check (within return window)",  "Return label emailed to customer within 2 minutes of request"],
+                ["BR-009", bd("orange","Could"), "Bot shall identify and suggest upsell or replacement products where relevant (Phase 2)",               "Out of scope Phase 1 — documented in backlog for Phase 2"],
               ]} />
             </S>
 
@@ -550,14 +553,14 @@ export default function AISupportCaseStudy() {
             <S id="uat" num="13" title="UAT & Testing"
               sub="How I validated the solution against requirements before go-live.">
               <T hs={["Test Case", "Scenario", "Expected Result", "Actual Result", "Status"]} rows={[
-                ["TC-001", "Customer types 'where is my order' — valid order number on file",    "Bot returns order status + tracking link within 30 sec",              "Resolved in 12 sec",              <Bdg color="green">Pass</Bdg>],
-                ["TC-002", "Customer initiates return for 8-day-old order (within 14-day policy)","Bot confirms eligibility, generates return label, emails to customer", "Label emailed in 78 sec",         <Bdg color="green">Pass</Bdg>],
-                ["TC-003", "Customer types 'I am furious' mid-conversation",                     "Bot detects negative sentiment; routes to human agent immediately",    "Routed in 1 message",             <Bdg color="green">Pass</Bdg>],
-                ["TC-004", "Customer clicks 'Talk to a person' button at any point",             "Ticket routed to human agent; full transcript attached",               "Context passed correctly",        <Bdg color="green">Pass</Bdg>],
-                ["TC-005", "Customer contacts outside business hours (Sunday 2am)",              "Bot responds instantly; resolves Tier-1 without agent",               "Responded in 8 sec",              <Bdg color="green">Pass</Bdg>],
-                ["TC-006", "Customer asks about a billing dispute",                              "Bot recognises billing intent; routes to human with context",          "Routed correctly",                <Bdg color="green">Pass</Bdg>],
-                ["TC-007", "Customer submits query with no clear intent",                        "Bot asks clarifying question with category options",                   "Clarification sent",              <Bdg color="green">Pass</Bdg>],
-                ["TC-008", "Customer types profanity in first message",                          "Bot flags as escalation; routes to agent with sensitivity note",       "FAIL — routed but no note",       <Bdg color="red">Fail → Fixed</Bdg>],
+                ["TC-001", "Customer types 'where is my order' — valid order number on file",    "Bot returns order status + tracking link within 30 sec",              "Resolved in 12 sec",              bd("green","Pass")],
+                ["TC-002", "Customer initiates return for 8-day-old order (within 14-day policy)","Bot confirms eligibility, generates return label, emails to customer", "Label emailed in 78 sec",         bd("green","Pass")],
+                ["TC-003", "Customer types 'I am furious' mid-conversation",                     "Bot detects negative sentiment; routes to human agent immediately",    "Routed in 1 message",             bd("green","Pass")],
+                ["TC-004", "Customer clicks 'Talk to a person' button at any point",             "Ticket routed to human agent; full transcript attached",               "Context passed correctly",        bd("green","Pass")],
+                ["TC-005", "Customer contacts outside business hours (Sunday 2am)",              "Bot responds instantly; resolves Tier-1 without agent",               "Responded in 8 sec",              bd("green","Pass")],
+                ["TC-006", "Customer asks about a billing dispute",                              "Bot recognises billing intent; routes to human with context",          "Routed correctly",                bd("green","Pass")],
+                ["TC-007", "Customer submits query with no clear intent",                        "Bot asks clarifying question with category options",                   "Clarification sent",              bd("green","Pass")],
+                ["TC-008", "Customer types profanity in first message",                          "Bot flags as escalation; routes to agent with sensitivity note",       "FAIL — routed but no note",       bd("red","Fail → Fixed")],
               ]} />
               <IB t="s">
                 <strong>Defect found and fixed:</strong> TC-008 revealed that the sentiment flag was routing the ticket correctly
@@ -617,13 +620,13 @@ export default function AISupportCaseStudy() {
                 <MC v="0 hrs" label="Agent Overtime" c={CL} note="Was 48 hrs/month" />
               </div>
               <T hs={["Metric", "Before", "After", "Change", "vs Target"]} rows={[
-                ["Ticket auto-resolution rate",     "0%",          "67%",        "+67%",   <Bdg color="green">Exceeded (target: 60%)</Bdg>],
-                ["Human ticket volume / month",     "2,400",       "860",        "−64%",   <Bdg color="green">Exceeded (target: −50%)</Bdg>],
-                ["First response time (human)",     "18 hours",    "2 hours",    "−89%",   <Bdg color="green">Exceeded (target: &lt; 4 hrs)</Bdg>],
-                ["CSAT score",                      "61%",         "82%",        "+21pts", <Bdg color="green">Exceeded (target: 72%)</Bdg>],
-                ["Cost per ticket",                 "£12.00",      "£4.20",      "−65%",   <Bdg color="green">Exceeded</Bdg>],
-                ["Agent overtime hours",            "48 hrs/month","0",          "−100%",  <Bdg color="green">Achieved</Bdg>],
-                ["Out-of-hours resolution coverage","0%",          "67% of OOH", "New capability", <Bdg color="green">Achieved</Bdg>],
+                ["Ticket auto-resolution rate",     "0%",          "67%",        "+67%",   bd("green","Exceeded (target: 60%)")],
+                ["Human ticket volume / month",     "2,400",       "860",        "−64%",   bd("green","Exceeded (target: −50%)")],
+                ["First response time (human)",     "18 hours",    "2 hours",    "−89%",   bd("green","Exceeded (target: < 4 hrs)")],
+                ["CSAT score",                      "61%",         "82%",        "+21pts", bd("green","Exceeded (target: 72%)")],
+                ["Cost per ticket",                 "£12.00",      "£4.20",      "−65%",   bd("green","Exceeded")],
+                ["Agent overtime hours",            "48 hrs/month","0",          "−100%",  bd("green","Achieved")],
+                ["Out-of-hours resolution coverage","0%",          "67% of OOH", "New capability", bd("green","Achieved")],
               ]} />
               <IB t="s">
                 <strong>Head of Operations (Sarah Yates) at 4-week review:</strong> &ldquo;We didn&apos;t hire the sixth agent.

@@ -1,5 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { ArrowRight, Clock } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Tag from "@/components/ui/Tag";
@@ -89,13 +90,13 @@ export default function BlogPreview() {
           viewport={{ once: true }}
           className="flex justify-center mt-10"
         >
-          <a
+          <Link
             href="/blog"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-white/[0.1] text-sm font-medium text-[#9CA3AF] hover:border-[#3B82F6]/40 hover:text-[#60A5FA] transition-all duration-200"
           >
             View all articles
             <ArrowRight size={13} />
-          </a>
+          </Link>
         </motion.div>
       </div>
     </section>

@@ -3,10 +3,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import {
   ArrowLeft, ArrowRight, CheckCircle2, AlertTriangle, Info,
-  Car, TrendingUp, Database, Target, Users, Code2,
-  FileText, Layers, Activity, Zap, GitBranch, TestTube2,
-  Rocket, Settings, BookOpen, Award, RefreshCw,
-  MessageSquare, Clock, Shield, MapPin,
+  Car, Target, Code2, FileText, Activity,
 } from "lucide-react";
 
 // ── TOC ───────────────────────────────────────────────────────────
@@ -152,6 +149,11 @@ function Bdg({ children, color = "blue" }: { children: React.ReactNode; color?: 
 
 function Glass({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return <div className={`glass rounded-2xl p-6 ${className}`}>{children}</div>;
+}
+
+// Helper to avoid jsx-key errors when Bdg is used inside array literals
+function bd(color: string, text: string): React.ReactNode {
+  return <Bdg color={color}>{text}</Bdg>;
 }
 
 // ── Page ──────────────────────────────────────────────────────────
@@ -306,12 +308,12 @@ export default function CarRentalCaseStudy() {
                 the final system — and decided how to engage with each of them.
               </p>
               <T hs={["Designation", "What They Needed", "Why They Matter", "Power", "Interest"]} rows={[
-                ["Operations Manager (Head Office)", "A single dashboard showing all 3 branches — total bookings, idle cars, revenue, complaints", "Final decision maker; project sponsor; approved budget",                              <Bdg color="red">High</Bdg>,    <Bdg color="red">High</Bdg>],
-                ["Branch Manager (×3)",              "Real-time booking screen, ability to see which cars are available right now at their branch", "Day-to-day users of the new system; critical for adoption",                          <Bdg color="yellow">Med</Bdg>,  <Bdg color="red">High</Bdg>],
-                ["Fleet Manager",                    "A way to mark a car as 'In Service' or 'Back from Service' that immediately shows for everyone","Controls vehicle availability — most impacted person by the old manual system",     <Bdg color="yellow">Med</Bdg>,  <Bdg color="red">High</Bdg>],
-                ["Customer Service Agents (×6)",     "A simple booking screen — enter customer name, date, car type, confirm. Fast and easy.",       "The people who create every booking; heavy daily users of the system",               <Bdg color="red">Low</Bdg>,     <Bdg color="red">High</Bdg>],
-                ["Finance Manager",                  "Monthly revenue report per branch; pending payments; total bookings vs. cancellations",        "Needs financial data; currently receives a manually compiled Excel from each branch", <Bdg color="red">High</Bdg>,    <Bdg color="yellow">Med</Bdg>],
-                ["IT Manager",                       "Clear technical specifications before development begins",                                     "Will build and maintain the system; must be involved from early design",             <Bdg color="yellow">Med</Bdg>,  <Bdg color="yellow">Med</Bdg>],
+                ["Operations Manager (Head Office)", "A single dashboard showing all 3 branches — total bookings, idle cars, revenue, complaints", "Final decision maker; project sponsor; approved budget",                              bd("red","High"),    bd("red","High")],
+                ["Branch Manager (×3)",              "Real-time booking screen, ability to see which cars are available right now at their branch", "Day-to-day users of the new system; critical for adoption",                          bd("yellow","Med"),  bd("red","High")],
+                ["Fleet Manager",                    "A way to mark a car as 'In Service' or 'Back from Service' that immediately shows for everyone","Controls vehicle availability — most impacted person by the old manual system",     bd("yellow","Med"),  bd("red","High")],
+                ["Customer Service Agents (×6)",     "A simple booking screen — enter customer name, date, car type, confirm. Fast and easy.",       "The people who create every booking; heavy daily users of the system",               bd("red","Low"),     bd("red","High")],
+                ["Finance Manager",                  "Monthly revenue report per branch; pending payments; total bookings vs. cancellations",        "Needs financial data; currently receives a manually compiled Excel from each branch", bd("red","High"),    bd("yellow","Med")],
+                ["IT Manager",                       "Clear technical specifications before development begins",                                     "Will build and maintain the system; must be involved from early design",             bd("yellow","Med"),  bd("yellow","Med")],
               ]} />
               <Glass>
                 <h3 className="text-[#F9FAFB] text-sm font-semibold mb-4 uppercase tracking-wider">Power / Interest Grid</h3>
@@ -474,13 +476,13 @@ export default function CarRentalCaseStudy() {
             <S id="gap-analysis" num="06" title="Gap Analysis"
               sub="Comparing what the business has today against what it needs — making the scope of the new system completely clear before design begins.">
               <T hs={["What the Business Needs", "What Exists Today", "The Gap", "Priority"]} rows={[
-                ["Real-time car availability — any agent sees the same up-to-date availability at any moment", "A branch-specific Excel updated manually by agents at each branch",           "No live/shared view; availability 30 min to 24 hrs stale depending on when Excel was last updated", <Bdg color="red">Critical</Bdg>],
-                ["Double-booking prevention — once a car is confirmed, it must be locked for everyone else", "No locking in Excel — two agents can see the same car as available simultaneously", "Structurally impossible to prevent with the current tool. Only a proper DB system can do this.", <Bdg color="red">Critical</Bdg>],
-                ["Fleet Manager to update car status ('In Service') directly in the booking system",          "Fleet Manager sends a WhatsApp to Branch Manager who may or may not update Excel",  "3–4 service car bookings per month happen because the update chain breaks",                      <Bdg color="red">Critical</Bdg>],
-                ["Cross-branch fleet view — Operations Manager sees all 3 branches at once",                 "3 separate Excel files; head office gets a combined report once a month",           "Operations Manager sees status only once a month, 30 days old",                                  <Bdg color="red">Critical</Bdg>],
-                ["Digital check-in — customer details stored once, reused for every future booking",         "Paper form filled manually at the counter for every booking",                     "22-minute check-in per customer; same data re-entered every time; no customer history",           <Bdg color="yellow">High</Bdg>],
-                ["Automated SMS confirmation sent to customer when booking is confirmed",                    "No confirmation; customer told verbally to 'just come on the day'",               "No proof of booking for customer; disputes at counter; trust issues",                             <Bdg color="yellow">High</Bdg>],
-                ["Automated revenue report consolidated across all branches for Finance Manager",            "Finance Manager manually combines 3 Excel files every month (4–5 hours)",         "4–5 hours of finance team time wasted monthly on data consolidation",                             <Bdg color="orange">Medium</Bdg>],
+                ["Real-time car availability — any agent sees the same up-to-date availability at any moment", "A branch-specific Excel updated manually by agents at each branch",           "No live/shared view; availability 30 min to 24 hrs stale depending on when Excel was last updated", bd("red","Critical")],
+                ["Double-booking prevention — once a car is confirmed, it must be locked for everyone else", "No locking in Excel — two agents can see the same car as available simultaneously", "Structurally impossible to prevent with the current tool. Only a proper DB system can do this.", bd("red","Critical")],
+                ["Fleet Manager to update car status ('In Service') directly in the booking system",          "Fleet Manager sends a WhatsApp to Branch Manager who may or may not update Excel",  "3–4 service car bookings per month happen because the update chain breaks",                      bd("red","Critical")],
+                ["Cross-branch fleet view — Operations Manager sees all 3 branches at once",                 "3 separate Excel files; head office gets a combined report once a month",           "Operations Manager sees status only once a month, 30 days old",                                  bd("red","Critical")],
+                ["Digital check-in — customer details stored once, reused for every future booking",         "Paper form filled manually at the counter for every booking",                     "22-minute check-in per customer; same data re-entered every time; no customer history",           bd("yellow","High")],
+                ["Automated SMS confirmation sent to customer when booking is confirmed",                    "No confirmation; customer told verbally to 'just come on the day'",               "No proof of booking for customer; disputes at counter; trust issues",                             bd("yellow","High")],
+                ["Automated revenue report consolidated across all branches for Finance Manager",            "Finance Manager manually combines 3 Excel files every month (4–5 hours)",         "4–5 hours of finance team time wasted monthly on data consolidation",                             bd("orange","Medium")],
               ]} />
             </S>
 
@@ -488,14 +490,14 @@ export default function CarRentalCaseStudy() {
             <S id="brd" num="07" title="Business Requirements Document (BRD)"
               sub="The BRD captures every business requirement in plain language — agreed and signed off by the Operations Manager and Finance Manager before any development begins.">
               <T hs={["ID", "Priority", "What the System Must Do", "Problem It Fixes", "How We'll Know It's Done"]} rows={[
-                ["BR-001", <Bdg color="red">Must</Bdg>,    "Show real-time car availability across all 3 branches in one single screen",                         "Cross-branch visibility gap",   "Agent at Branch A can see available cars at Branches B and C without calling them"],
-                ["BR-002", <Bdg color="red">Must</Bdg>,    "When a booking is confirmed, the car must be immediately locked — no other agent can book it",       "Double bookings",               "No double booking in 1 month of testing with concurrent users"],
-                ["BR-003", <Bdg color="red">Must</Bdg>,    "Fleet Manager must be able to mark a car as 'In Service' from the system — instantly visible to all","Service car still bookable",   "Within 5 minutes of Fleet Manager updating status, no agent can book that car"],
-                ["BR-004", <Bdg color="red">Must</Bdg>,    "Store customer details once — when the same customer books again, auto-fill their information",       "22-min manual check-in",        "Returning customer check-in completed in under 5 minutes"],
-                ["BR-005", <Bdg color="red">Must</Bdg>,    "Operations Manager must see a live dashboard: total bookings today, fleet status, revenue this month","Head office blind spot",        "Dashboard shows numbers updated within 15 minutes of any booking or change"],
-                ["BR-006", <Bdg color="yellow">Should</Bdg>,"Send an automated SMS to the customer when their booking is confirmed — includes booking ID, car type, date and time", "No confirmation issue", "Customer receives SMS within 2 minutes of booking confirmation"],
-                ["BR-007", <Bdg color="yellow">Should</Bdg>,"Generate an automated monthly revenue and booking report for Finance Manager — no manual compilation needed", "4–5 hr monthly effort", "Finance Manager receives report automatically on the 1st of each month"],
-                ["BR-008", <Bdg color="orange">Could</Bdg>, "Allow customers to make bookings online through the company website",                                "Reach and convenience",         "Online booking form live; customer can book and receive SMS without calling"],
+                ["BR-001", bd("red","Must"),    "Show real-time car availability across all 3 branches in one single screen",                         "Cross-branch visibility gap",   "Agent at Branch A can see available cars at Branches B and C without calling them"],
+                ["BR-002", bd("red","Must"),    "When a booking is confirmed, the car must be immediately locked — no other agent can book it",       "Double bookings",               "No double booking in 1 month of testing with concurrent users"],
+                ["BR-003", bd("red","Must"),    "Fleet Manager must be able to mark a car as 'In Service' from the system — instantly visible to all","Service car still bookable",   "Within 5 minutes of Fleet Manager updating status, no agent can book that car"],
+                ["BR-004", bd("red","Must"),    "Store customer details once — when the same customer books again, auto-fill their information",       "22-min manual check-in",        "Returning customer check-in completed in under 5 minutes"],
+                ["BR-005", bd("red","Must"),    "Operations Manager must see a live dashboard: total bookings today, fleet status, revenue this month","Head office blind spot",        "Dashboard shows numbers updated within 15 minutes of any booking or change"],
+                ["BR-006", bd("yellow","Should"),"Send an automated SMS to the customer when their booking is confirmed — includes booking ID, car type, date and time", "No confirmation issue", "Customer receives SMS within 2 minutes of booking confirmation"],
+                ["BR-007", bd("yellow","Should"),"Generate an automated monthly revenue and booking report for Finance Manager — no manual compilation needed", "4–5 hr monthly effort", "Finance Manager receives report automatically on the 1st of each month"],
+                ["BR-008", bd("orange","Could"), "Allow customers to make bookings online through the company website",                                "Reach and convenience",         "Online booking form live; customer can book and receive SMS without calling"],
               ]} />
               <IB t="s">
                 BRD formally reviewed and approved by the Operations Manager and Finance Manager at the end
@@ -556,22 +558,22 @@ export default function CarRentalCaseStudy() {
             <S id="frs" num="09" title="Functional & Non-Functional Requirements"
               sub="Functional requirements describe what the system must do. Non-functional requirements describe how well it must do it.">
               <T hs={["ID", "What the System Must Do (Functional)", "From BR", "Priority"]} rows={[
-                ["FR-001", "Show all available cars across all 3 branches for a searched date range — with car type, branch location, and daily rate",                  "BR-001", <Bdg color="red">Must</Bdg>],
-                ["FR-002", "When an agent confirms a booking, the selected car must be locked in the system immediately — no other agent can select it",               "BR-002", <Bdg color="red">Must</Bdg>],
-                ["FR-003", "Fleet Manager can update car status: Available / In Service / Under Repair / Retired. Change reflects immediately for all agents.",         "BR-003", <Bdg color="red">Must</Bdg>],
-                ["FR-004", "Customer database: store name, phone number, ID proof type and number. Auto-fill when the same phone number is entered again.",            "BR-004", <Bdg color="red">Must</Bdg>],
-                ["FR-005", "Operations dashboard: total bookings today (all branches), number of cars available (all branches), total revenue this month, last 7-day trend", "BR-005", <Bdg color="red">Must</Bdg>],
-                ["FR-006", "Booking confirmation SMS sent automatically: customer name, booking ID, car type, pickup date and time, branch address",                   "BR-006", <Bdg color="yellow">Should</Bdg>],
-                ["FR-007", "Generate and email a consolidated monthly report to Finance Manager: bookings, revenue, cancellations, per branch breakdown",               "BR-007", <Bdg color="yellow">Should</Bdg>],
-                ["FR-008", "Car return flow: agent marks car as 'Returned' in system, records fuel level and any damage notes with a photo upload option",             "BR-002", <Bdg color="yellow">Should</Bdg>],
-                ["FR-009", "Booking history per car — all past bookings for a specific car, with customer name, dates, and any damage notes",                          "BR-004", <Bdg color="orange">Could</Bdg>],
+                ["FR-001", "Show all available cars across all 3 branches for a searched date range — with car type, branch location, and daily rate",                  "BR-001", bd("red","Must")],
+                ["FR-002", "When an agent confirms a booking, the selected car must be locked in the system immediately — no other agent can select it",               "BR-002", bd("red","Must")],
+                ["FR-003", "Fleet Manager can update car status: Available / In Service / Under Repair / Retired. Change reflects immediately for all agents.",         "BR-003", bd("red","Must")],
+                ["FR-004", "Customer database: store name, phone number, ID proof type and number. Auto-fill when the same phone number is entered again.",            "BR-004", bd("red","Must")],
+                ["FR-005", "Operations dashboard: total bookings today (all branches), number of cars available (all branches), total revenue this month, last 7-day trend", "BR-005", bd("red","Must")],
+                ["FR-006", "Booking confirmation SMS sent automatically: customer name, booking ID, car type, pickup date and time, branch address",                   "BR-006", bd("yellow","Should")],
+                ["FR-007", "Generate and email a consolidated monthly report to Finance Manager: bookings, revenue, cancellations, per branch breakdown",               "BR-007", bd("yellow","Should")],
+                ["FR-008", "Car return flow: agent marks car as 'Returned' in system, records fuel level and any damage notes with a photo upload option",             "BR-002", bd("yellow","Should")],
+                ["FR-009", "Booking history per car — all past bookings for a specific car, with customer name, dates, and any damage notes",                          "BR-004", bd("orange","Could")],
               ]} />
               <T hs={["ID", "How the System Must Behave (Non-Functional)", "Measured By", "Priority"]} rows={[
-                ["NFR-001", "Car availability screen must load within 2 seconds after search — agents cannot wait longer than this during a live customer call",     "Load test with 10 concurrent users",                  <Bdg color="red">Must</Bdg>],
-                ["NFR-002", "The car locking must happen within 1 second of booking confirmation — the smaller the window, the lower the double-booking risk",       "Test with 2 agents confirming same car simultaneously", <Bdg color="red">Must</Bdg>],
-                ["NFR-003", "System must be accessible from any desktop browser — agents use different computers at different branches",                             "Test on Chrome, Firefox, Edge",                       <Bdg color="red">Must</Bdg>],
-                ["NFR-004", "Only employees with a valid login can access the system — no public access",                                                           "Try accessing without login; should redirect to login", <Bdg color="red">Must</Bdg>],
-                ["NFR-005", "SMS must be sent within 2 minutes of booking confirmation",                                                                           "Time from confirmation to SMS delivery logged for 20 test bookings", <Bdg color="yellow">Should</Bdg>],
+                ["NFR-001", "Car availability screen must load within 2 seconds after search — agents cannot wait longer than this during a live customer call",     "Load test with 10 concurrent users",                  bd("red","Must")],
+                ["NFR-002", "The car locking must happen within 1 second of booking confirmation — the smaller the window, the lower the double-booking risk",       "Test with 2 agents confirming same car simultaneously", bd("red","Must")],
+                ["NFR-003", "System must be accessible from any desktop browser — agents use different computers at different branches",                             "Test on Chrome, Firefox, Edge",                       bd("red","Must")],
+                ["NFR-004", "Only employees with a valid login can access the system — no public access",                                                           "Try accessing without login; should redirect to login", bd("red","Must")],
+                ["NFR-005", "SMS must be sent within 2 minutes of booking confirmation",                                                                           "Time from confirmation to SMS delivery logged for 20 test bookings", bd("yellow","Should")],
               ]} />
             </S>
 
@@ -824,10 +826,10 @@ ORDER BY utilization_pct DESC;`} />
             <S id="backlog" num="15" title="Backlog Creation & Prioritization"
               sub="The full list of everything to be built, sorted by what is most critical to deliver first — using MoSCoW prioritization.">
               <T hs={["Priority", "Stories", "What Gets Built", "Sprint"]} rows={[
-                [<Bdg color="red">Must Have</Bdg>,    "10 stories — 61 pts", "Vehicle database, customer database, real-time availability search, car locking on confirmation, Fleet Manager status update, fleet status board, basic booking creation and confirmation",   "Sprint 1 & 2"],
-                [<Bdg color="yellow">Should Have</Bdg>,"6 stories — 31 pts",  "SMS confirmation, automated monthly finance report, car return process with damage notes, Operations Manager dashboard, agent login and role-based access",                                  "Sprint 3"],
-                [<Bdg color="orange">Could Have</Bdg>, "4 stories — 18 pts",  "Fleet utilization chart on Operations dashboard, car photo on booking screen, maintenance alert for upcoming bookings when car marked 'In Service'",                                         "Sprint 4"],
-                [<Bdg color="gray">Won&apos;t Have</Bdg>,"3 stories — —",     "Online customer booking portal, payment gateway integration, WhatsApp booking bot (Phase 2 backlog)",                                                                                       "Phase 2"],
+                [bd("red","Must Have"),    "10 stories — 61 pts", "Vehicle database, customer database, real-time availability search, car locking on confirmation, Fleet Manager status update, fleet status board, basic booking creation and confirmation",   "Sprint 1 & 2"],
+                [bd("yellow","Should Have"),"6 stories — 31 pts",  "SMS confirmation, automated monthly finance report, car return process with damage notes, Operations Manager dashboard, agent login and role-based access",                                  "Sprint 3"],
+                [bd("orange","Could Have"), "4 stories — 18 pts",  "Fleet utilization chart on Operations dashboard, car photo on booking screen, maintenance alert for upcoming bookings when car marked 'In Service'",                                         "Sprint 4"],
+                [bd("gray","Won't Have"),   "3 stories — —",       "Online customer booking portal, payment gateway integration, WhatsApp booking bot (Phase 2 backlog)",                                                                                       "Phase 2"],
               ]} />
               <Glass>
                 <h3 className="text-[#F9FAFB] text-sm font-semibold mb-4 uppercase tracking-wider">Sprint Plan — 4 Sprints of 2 Weeks Each (10 Weeks Total)</h3>
@@ -909,12 +911,12 @@ ORDER BY utilization_pct DESC;`} />
             <S id="uat" num="19" title="User Acceptance Testing (UAT)"
               sub="Real users testing the system using realistic scenarios — confirming it does exactly what was agreed in the BRD before go-live approval is given.">
               <T hs={["What Was Tested", "Test Cases", "Tested By", "Passed", "Failed", "Status"]} rows={[
-                ["Booking creation and real-time availability",         "10", "Branch Manager + Customer Service Agent (×2)", "9",  "1", <Bdg color="yellow">1 Fixed</Bdg>],
-                ["Car locking — no double bookings possible",           "6",  "IT Manager + Branch Manager",                  "6",  "0", <Bdg color="green">All Pass</Bdg>],
-                ["Fleet Manager status update (In Service / Available)","6",  "Fleet Manager",                                "5",  "1", <Bdg color="yellow">1 Fixed</Bdg>],
-                ["Operations Manager dashboard — all branches",         "8",  "Operations Manager",                           "8",  "0", <Bdg color="green">All Pass</Bdg>],
-                ["SMS confirmation — customer receives within 2 min",  "5",  "Customer Service Agent",                       "5",  "0", <Bdg color="green">All Pass</Bdg>],
-                ["Car return flow with damage notes",                   "5",  "Customer Service Agent + Branch Manager",      "4",  "1", <Bdg color="yellow">1 Fixed</Bdg>],
+                ["Booking creation and real-time availability",         "10", "Branch Manager + Customer Service Agent (×2)", "9",  "1", bd("yellow","1 Fixed")],
+                ["Car locking — no double bookings possible",           "6",  "IT Manager + Branch Manager",                  "6",  "0", bd("green","All Pass")],
+                ["Fleet Manager status update (In Service / Available)","6",  "Fleet Manager",                                "5",  "1", bd("yellow","1 Fixed")],
+                ["Operations Manager dashboard — all branches",         "8",  "Operations Manager",                           "8",  "0", bd("green","All Pass")],
+                ["SMS confirmation — customer receives within 2 min",  "5",  "Customer Service Agent",                       "5",  "0", bd("green","All Pass")],
+                ["Car return flow with damage notes",                   "5",  "Customer Service Agent + Branch Manager",      "4",  "1", bd("yellow","1 Fixed")],
               ]} />
               <Glass>
                 <h3 className="text-[#F9FAFB] text-sm font-semibold mb-3 uppercase tracking-wider">Defects Found in UAT & How They Were Fixed</h3>
@@ -999,12 +1001,12 @@ ORDER BY utilization_pct DESC;`} />
             <S id="pir" num="22" title="Post-Implementation Review"
               sub="Reviewed 4 weeks after go-live — did the system deliver what was promised? What worked, what didn't, what to improve?">
               <T hs={["Finding", "Type", "Detail"]} rows={[
-                ["Double bookings: 23/month → 0 in 4 weeks post go-live",                  <Bdg color="green">Positive</Bdg>,      "The car locking mechanism completely eliminated double bookings. Not a single incident in 4 weeks of full operation across all 3 branches."],
-                ["Customer check-in time reduced from 22 minutes to under 6 minutes",      <Bdg color="green">Positive</Bdg>,      "Returning customers auto-filled from the database. New customers entered once. Agents confirmed the new check-in was dramatically faster and less stressful."],
-                ["Operations Manager now checks dashboard every morning instead of calling branches", <Bdg color="green">Positive</Bdg>, "Operations Manager confirmed they no longer make the daily branch call. 'I open the dashboard and I can see everything in 2 minutes.'"],
-                ["Fleet utilization improved from 58% to 72% in first month",              <Bdg color="green">Positive</Bdg>,      "Agents now see idle cars at other branches and redirect customers there instead of turning them away. Still growing as agents get more comfortable using the cross-branch view."],
-                ["One agent at Branch C still calling other branches sometimes",            <Bdg color="yellow">Improvement</Bdg>,  "One agent had formed the habit strongly over 4 years. Their Branch Manager is doing additional 1-on-1 coaching. Will monitor in the next review."],
-                ["SMS delivery occasional delay on weekends — 5–8 minutes instead of 2",   <Bdg color="yellow">Learning</Bdg>,     "SMS gateway has lower throughput on weekends. Raised with the SMS provider. They confirmed it is a plan limitation — Operations Manager considering upgrading the SMS plan."],
+                ["Double bookings: 23/month → 0 in 4 weeks post go-live",                  bd("green","Positive"),      "The car locking mechanism completely eliminated double bookings. Not a single incident in 4 weeks of full operation across all 3 branches."],
+                ["Customer check-in time reduced from 22 minutes to under 6 minutes",      bd("green","Positive"),      "Returning customers auto-filled from the database. New customers entered once. Agents confirmed the new check-in was dramatically faster and less stressful."],
+                ["Operations Manager now checks dashboard every morning instead of calling branches", bd("green","Positive"), "Operations Manager confirmed they no longer make the daily branch call. 'I open the dashboard and I can see everything in 2 minutes.'"],
+                ["Fleet utilization improved from 58% to 72% in first month",              bd("green","Positive"),      "Agents now see idle cars at other branches and redirect customers there instead of turning them away. Still growing as agents get more comfortable using the cross-branch view."],
+                ["One agent at Branch C still calling other branches sometimes",            bd("yellow","Improvement"),  "One agent had formed the habit strongly over 4 years. Their Branch Manager is doing additional 1-on-1 coaching. Will monitor in the next review."],
+                ["SMS delivery occasional delay on weekends — 5–8 minutes instead of 2",   bd("yellow","Learning"),     "SMS gateway has lower throughput on weekends. Raised with the SMS provider. They confirmed it is a plan limitation — Operations Manager considering upgrading the SMS plan."],
               ]} />
               <Glass>
                 <h3 className="text-[#F9FAFB] text-sm font-semibold mb-3 uppercase tracking-wider">3 Key Lessons from This Project</h3>
@@ -1033,13 +1035,13 @@ ORDER BY utilization_pct DESC;`} />
                 <MC v="6min"  label="Customer check-in time"       c="#F59E0B" note="Was 22 min — 73% faster" />
               </div>
               <T hs={["What Was Promised in BRD", "Target", "Actual Result (8 Weeks)", "Status"]} rows={[
-                ["Real-time car availability across all 3 branches in one screen",                 "Single screen, all branches, live data",     "Working; agents at all 3 branches using it daily",                   <Bdg color="green">Done</Bdg>],
-                ["Car locked immediately on booking confirmation — no double bookings",             "Zero double bookings in 4 weeks of testing", "Zero double bookings in 8 weeks of live operation",                  <Bdg color="green">Done</Bdg>],
-                ["Fleet Manager marks car 'In Service' directly — immediately visible to all",     "Status change visible in under 1 minute",    "Status change visible in under 5 seconds in all tests",              <Bdg color="green">Done</Bdg>],
-                ["Returning customer check-in: auto-fill from database",                           "Check-in under 5 minutes for returning customers", "Average 4.2 minutes for returning customers",                   <Bdg color="green">Done</Bdg>],
-                ["Operations dashboard: all 3 branches live, updated within 30 minutes",          "Dashboard live, refreshes every 30 min",     "Dashboard running; Operations Manager checks it every morning",      <Bdg color="green">Done</Bdg>],
-                ["SMS confirmation to customer within 2 minutes of booking",                       "SMS delivered within 2 minutes",            "Weekdays: avg 80 seconds. Weekends: avg 6 minutes (gateway limit)", <Bdg color="yellow">Partial</Bdg>],
-                ["Automated monthly finance report — no manual compilation",                       "Report auto-generated on 1st of month",      "Finance Manager received report automatically for 2 months running", <Bdg color="green">Done</Bdg>],
+                ["Real-time car availability across all 3 branches in one screen",                 "Single screen, all branches, live data",     "Working; agents at all 3 branches using it daily",                   bd("green","Done")],
+                ["Car locked immediately on booking confirmation — no double bookings",             "Zero double bookings in 4 weeks of testing", "Zero double bookings in 8 weeks of live operation",                  bd("green","Done")],
+                ["Fleet Manager marks car 'In Service' directly — immediately visible to all",     "Status change visible in under 1 minute",    "Status change visible in under 5 seconds in all tests",              bd("green","Done")],
+                ["Returning customer check-in: auto-fill from database",                           "Check-in under 5 minutes for returning customers", "Average 4.2 minutes for returning customers",                   bd("green","Done")],
+                ["Operations dashboard: all 3 branches live, updated within 30 minutes",          "Dashboard live, refreshes every 30 min",     "Dashboard running; Operations Manager checks it every morning",      bd("green","Done")],
+                ["SMS confirmation to customer within 2 minutes of booking",                       "SMS delivered within 2 minutes",            "Weekdays: avg 80 seconds. Weekends: avg 6 minutes (gateway limit)", bd("yellow","Partial")],
+                ["Automated monthly finance report — no manual compilation",                       "Report auto-generated on 1st of month",      "Finance Manager received report automatically for 2 months running", bd("green","Done")],
               ]} />
               <Glass>
                 <p className="text-[#D1D5DB] text-sm italic leading-relaxed border-l-2 pl-4" style={{ borderColor: "#10B981" }}>

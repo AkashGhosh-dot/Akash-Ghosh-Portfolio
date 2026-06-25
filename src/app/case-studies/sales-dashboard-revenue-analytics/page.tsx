@@ -3,10 +3,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import {
   ArrowLeft, ArrowRight, CheckCircle2, AlertTriangle, Info,
-  BarChart3, TrendingUp, Database, Target, Users, Code2,
-  FileText, Layers, Activity, Zap, GitBranch, TestTube2,
-  Rocket, Settings, BookOpen, Award, RefreshCw,
-  MessageSquare, Clock, Shield, Package,
+  BarChart3, TrendingUp, Target, Code2, Package,
 } from "lucide-react";
 
 // ── TOC ───────────────────────────────────────────────────────────
@@ -154,6 +151,11 @@ function Glass({ children, className = "" }: { children: React.ReactNode; classN
   return <div className={`glass rounded-2xl p-6 ${className}`}>{children}</div>;
 }
 
+// Helper to avoid jsx-key errors when Bdg is used inside array literals
+function bd(color: string, text: string): React.ReactNode {
+  return <Bdg color={color}>{text}</Bdg>;
+}
+
 // ── Page ──────────────────────────────────────────────────────────
 
 export default function SalesDashboardCaseStudy() {
@@ -293,11 +295,11 @@ export default function SalesDashboardCaseStudy() {
                 and design a solution that everyone would actually use.
               </p>
               <T hs={["Designation", "What They Wanted to Know", "Why They Matter", "Power", "Interest"]} rows={[
-                ["Sales Manager",       "How much revenue are we making? Which product and channel is performing?",          "Final approver; would use dashboard daily to track performance",             <Bdg color="red">High</Bdg>,    <Bdg color="red">High</Bdg>],
-                ["Marketing Manager",  "Which ads are actually driving sales? Where should I put the budget?",              "Controlled the marketing spend causing the premium product waste",           <Bdg color="yellow">Med</Bdg>,  <Bdg color="red">High</Bdg>],
-                ["Product Manager",    "Why is the premium product not selling? Should we change the price?",               "Owned the product catalogue and pricing decisions",                          <Bdg color="yellow">Med</Bdg>,  <Bdg color="red">High</Bdg>],
-                ["Finance Manager",    "What is our actual monthly revenue? What are we forecasting for next quarter?",      "Needed accurate revenue data; approved the project budget",                  <Bdg color="red">High</Bdg>,    <Bdg color="yellow">Med</Bdg>],
-                ["Operations Manager", "How much inventory should we order? Which products need restocking?",               "Responsible for stock planning — currently ordering wrong quantities each season", <Bdg color="yellow">Med</Bdg>, <Bdg color="yellow">Med</Bdg>],
+                ["Sales Manager",       "How much revenue are we making? Which product and channel is performing?",          "Final approver; would use dashboard daily to track performance",             bd("red","High"),    bd("red","High")],
+                ["Marketing Manager",  "Which ads are actually driving sales? Where should I put the budget?",              "Controlled the marketing spend causing the premium product waste",           bd("yellow","Med"),  bd("red","High")],
+                ["Product Manager",    "Why is the premium product not selling? Should we change the price?",               "Owned the product catalogue and pricing decisions",                          bd("yellow","Med"),  bd("red","High")],
+                ["Finance Manager",    "What is our actual monthly revenue? What are we forecasting for next quarter?",      "Needed accurate revenue data; approved the project budget",                  bd("red","High"),    bd("yellow","Med")],
+                ["Operations Manager", "How much inventory should we order? Which products need restocking?",               "Responsible for stock planning — currently ordering wrong quantities each season", bd("yellow","Med"), bd("yellow","Med")],
               ]} />
               <Glass>
                 <h3 className="text-[#F9FAFB] text-sm font-semibold mb-4 uppercase tracking-wider">Power / Interest Grid</h3>
@@ -479,13 +481,13 @@ export default function SalesDashboardCaseStudy() {
                 by how critical it is to fix.
               </p>
               <T hs={["What the Business Needs", "What Exists Today", "The Gap", "Priority"]} rows={[
-                ["A single place to see all sales from Amazon, Flipkart, and website together",   "Three separate reports downloaded manually from three different platforms",       "No connected system; data combined only once a month, manually",             <Bdg color="red">Critical</Bdg>],
-                ["Product performance comparison — which product earns the most vs. costs the most to market", "No comparison exists; marketing and sales tracked in separate sheets",           "Marketing spend and sales revenue never looked at side-by-side",             <Bdg color="red">Critical</Bdg>],
-                ["Monthly and seasonal sales trend (which months are slow, which are fast)",      "Possible from historical data but nobody has had time to do the analysis",      "24-month trend never visualised; seasonal planning done by feel",             <Bdg color="red">Critical</Bdg>],
-                ["Product return rate by channel",                                               "Returns tracked at platform level but never broken down by product",             "High return rate products (like the 34%-return product) go unnoticed",       <Bdg color="red">Critical</Bdg>],
-                ["Which marketing channel (Amazon Ads, Flipkart Ads, Google) drives actual revenue", "Ad spend known; revenue by channel known separately; never connected",         "Marketing Manager cannot see which ₹1 of ad spend generates the most sales", <Bdg color="yellow">High</Bdg>],
-                ["Automated daily/weekly reports instead of 8-hour monthly manual build",         "Fully manual; one person spends 8–10 hours every month",                         "No automation; high effort, outdated output",                                <Bdg color="yellow">High</Bdg>],
-                ["Inventory planning based on seasonal data — order the right stock for Jan–Mar", "Ordering based on last month's numbers, not seasonal history",                  "Over-ordering for the slow season, under-ordering for festive season",        <Bdg color="orange">Medium</Bdg>],
+                ["A single place to see all sales from Amazon, Flipkart, and website together",   "Three separate reports downloaded manually from three different platforms",       "No connected system; data combined only once a month, manually",             bd("red","Critical")],
+                ["Product performance comparison — which product earns the most vs. costs the most to market", "No comparison exists; marketing and sales tracked in separate sheets",           "Marketing spend and sales revenue never looked at side-by-side",             bd("red","Critical")],
+                ["Monthly and seasonal sales trend (which months are slow, which are fast)",      "Possible from historical data but nobody has had time to do the analysis",      "24-month trend never visualised; seasonal planning done by feel",             bd("red","Critical")],
+                ["Product return rate by channel",                                               "Returns tracked at platform level but never broken down by product",             "High return rate products (like the 34%-return product) go unnoticed",       bd("red","Critical")],
+                ["Which marketing channel (Amazon Ads, Flipkart Ads, Google) drives actual revenue", "Ad spend known; revenue by channel known separately; never connected",         "Marketing Manager cannot see which ₹1 of ad spend generates the most sales", bd("yellow","High")],
+                ["Automated daily/weekly reports instead of 8-hour monthly manual build",         "Fully manual; one person spends 8–10 hours every month",                         "No automation; high effort, outdated output",                                bd("yellow","High")],
+                ["Inventory planning based on seasonal data — order the right stock for Jan–Mar", "Ordering based on last month's numbers, not seasonal history",                  "Over-ordering for the slow season, under-ordering for festive season",        bd("orange","Medium")],
               ]} />
             </S>
 
@@ -493,14 +495,14 @@ export default function SalesDashboardCaseStudy() {
             <S id="brd" num="07" title="Business Requirements Document (BRD)"
               sub="The BRD is the official document that captures everything the new system must do — in business language, not technical language. It is the agreement between the BA and the stakeholders before any development begins.">
               <T hs={["ID", "Must / Should / Could", "What the System Must Do", "Which Problem It Solves", "How We'll Know It's Done"]} rows={[
-                ["BR-001", <Bdg color="red">Must</Bdg>,    "Show combined sales from Amazon, Flipkart, and the website in one single dashboard view",                           "Gap: No single view",            "Dashboard shows one total revenue number that matches the sum of all 3 platforms"],
-                ["BR-002", <Bdg color="red">Must</Bdg>,    "Show each product's total sales, total units sold, and total marketing spend side-by-side for easy comparison",    "Problem 1: Premium product waste","All 6 products visible in one table with sales and spend columns"],
-                ["BR-003", <Bdg color="red">Must</Bdg>,    "Show monthly sales for the last 24 months as a chart so seasonal patterns are clearly visible",                    "Problem 2: Jan–Mar crash",       "A month-by-month chart covering 2 full years is visible and accurate"],
-                ["BR-004", <Bdg color="red">Must</Bdg>,    "Show return rate for each product — what percentage of orders are being returned",                                  "Gap: High return rate hidden",   "Return % visible per product; sorted from highest to lowest return rate"],
-                ["BR-005", <Bdg color="red">Must</Bdg>,    "Data should update automatically every day — no manual downloading or copy-pasting required",                       "AS-IS: 8-hour manual process",   "Sales Manager confirms they have not manually downloaded any file for 2 weeks"],
-                ["BR-006", <Bdg color="yellow">Should</Bdg>,"Show which sales channel (Amazon / Flipkart / Website) generates the most revenue after returns and refunds",      "Gap: Channel profitability",     "Revenue shown separately for each channel with returns deducted"],
-                ["BR-007", <Bdg color="yellow">Should</Bdg>,"Automatically send a weekly summary report by email every Monday morning to Sales Manager and Finance Manager",   "AS-IS: Manual PowerPoint",       "Email arrives automatically on Monday; no manual action needed"],
-                ["BR-008", <Bdg color="orange">Could</Bdg>, "Show an inventory forecast for the next 3 months based on seasonal sales history",                                 "Gap: Wrong inventory ordering",  "Forecast numbers are within 15% of actual sales in the following month"],
+                ["BR-001", bd("red","Must"),    "Show combined sales from Amazon, Flipkart, and the website in one single dashboard view",                           "Gap: No single view",            "Dashboard shows one total revenue number that matches the sum of all 3 platforms"],
+                ["BR-002", bd("red","Must"),    "Show each product's total sales, total units sold, and total marketing spend side-by-side for easy comparison",    "Problem 1: Premium product waste","All 6 products visible in one table with sales and spend columns"],
+                ["BR-003", bd("red","Must"),    "Show monthly sales for the last 24 months as a chart so seasonal patterns are clearly visible",                    "Problem 2: Jan–Mar crash",       "A month-by-month chart covering 2 full years is visible and accurate"],
+                ["BR-004", bd("red","Must"),    "Show return rate for each product — what percentage of orders are being returned",                                  "Gap: High return rate hidden",   "Return % visible per product; sorted from highest to lowest return rate"],
+                ["BR-005", bd("red","Must"),    "Data should update automatically every day — no manual downloading or copy-pasting required",                       "AS-IS: 8-hour manual process",   "Sales Manager confirms they have not manually downloaded any file for 2 weeks"],
+                ["BR-006", bd("yellow","Should"),"Show which sales channel (Amazon / Flipkart / Website) generates the most revenue after returns and refunds",      "Gap: Channel profitability",     "Revenue shown separately for each channel with returns deducted"],
+                ["BR-007", bd("yellow","Should"),"Automatically send a weekly summary report by email every Monday morning to Sales Manager and Finance Manager",   "AS-IS: Manual PowerPoint",       "Email arrives automatically on Monday; no manual action needed"],
+                ["BR-008", bd("orange","Could"), "Show an inventory forecast for the next 3 months based on seasonal sales history",                                 "Gap: Wrong inventory ordering",  "Forecast numbers are within 15% of actual sales in the following month"],
               ]} />
               <IB t="s">
                 The BRD was reviewed in a formal meeting with the Sales Manager and Finance Manager at the end of
@@ -561,23 +563,23 @@ export default function SalesDashboardCaseStudy() {
             <S id="frs" num="09" title="Functional & Non-Functional Requirements"
               sub="Functional requirements describe what the system must do. Non-functional requirements describe how well it must do it — speed, security, reliability.">
               <T hs={["ID", "What the System Must Do (Functional)", "BR It Comes From", "Priority"]} rows={[
-                ["FR-001", "Connect to Amazon Seller Central API and automatically download new orders and returns every night",                                         "BR-001", <Bdg color="red">Must</Bdg>],
-                ["FR-002", "Connect to Flipkart Seller Hub API and automatically download new orders and returns every night",                                          "BR-001", <Bdg color="red">Must</Bdg>],
-                ["FR-003", "Connect to the website (Shopify) and automatically pull new orders and returns every night",                                                "BR-001", <Bdg color="red">Must</Bdg>],
-                ["FR-004", "Show a product performance table: product name, units sold, total revenue, total ad spend, and revenue earned per ₹1 of ad spent",         "BR-002", <Bdg color="red">Must</Bdg>],
-                ["FR-005", "Show a 24-month sales trend chart — bar chart showing total monthly revenue for the last 2 years",                                         "BR-003", <Bdg color="red">Must</Bdg>],
-                ["FR-006", "Calculate and display the return rate (%) for each product — i.e., what % of orders were returned",                                        "BR-004", <Bdg color="red">Must</Bdg>],
-                ["FR-007", "Show revenue broken down by channel: Amazon total, Flipkart total, Website total — with returns already deducted",                         "BR-006", <Bdg color="yellow">Should</Bdg>],
-                ["FR-008", "Automatically send a weekly email summary every Monday at 8am to the Sales Manager and Finance Manager",                                   "BR-007", <Bdg color="yellow">Should</Bdg>],
-                ["FR-009", "Show a 3-month sales forecast based on the same months from the previous 2 years",                                                        "BR-008", <Bdg color="orange">Could</Bdg>],
-                ["FR-010", "Allow each user role (Sales, Marketing, Finance, Operations) to see only their relevant dashboard view",                                   "BR-001", <Bdg color="red">Must</Bdg>],
+                ["FR-001", "Connect to Amazon Seller Central API and automatically download new orders and returns every night",                                         "BR-001", bd("red","Must")],
+                ["FR-002", "Connect to Flipkart Seller Hub API and automatically download new orders and returns every night",                                          "BR-001", bd("red","Must")],
+                ["FR-003", "Connect to the website (Shopify) and automatically pull new orders and returns every night",                                                "BR-001", bd("red","Must")],
+                ["FR-004", "Show a product performance table: product name, units sold, total revenue, total ad spend, and revenue earned per ₹1 of ad spent",         "BR-002", bd("red","Must")],
+                ["FR-005", "Show a 24-month sales trend chart — bar chart showing total monthly revenue for the last 2 years",                                         "BR-003", bd("red","Must")],
+                ["FR-006", "Calculate and display the return rate (%) for each product — i.e., what % of orders were returned",                                        "BR-004", bd("red","Must")],
+                ["FR-007", "Show revenue broken down by channel: Amazon total, Flipkart total, Website total — with returns already deducted",                         "BR-006", bd("yellow","Should")],
+                ["FR-008", "Automatically send a weekly email summary every Monday at 8am to the Sales Manager and Finance Manager",                                   "BR-007", bd("yellow","Should")],
+                ["FR-009", "Show a 3-month sales forecast based on the same months from the previous 2 years",                                                        "BR-008", bd("orange","Could")],
+                ["FR-010", "Allow each user role (Sales, Marketing, Finance, Operations) to see only their relevant dashboard view",                                   "BR-001", bd("red","Must")],
               ]} />
               <T hs={["ID", "How the System Must Behave (Non-Functional)", "How We Measure It", "Priority"]} rows={[
-                ["NFR-001", "Dashboard must load within 3 seconds on a normal internet connection",                          "Tested by opening the dashboard 10 times and measuring load time",   <Bdg color="red">Must</Bdg>],
-                ["NFR-002", "Daily data refresh must complete by 6am so morning data is ready when the team starts work",   "Check that data is updated before 6am for 5 consecutive working days",<Bdg color="red">Must</Bdg>],
-                ["NFR-003", "Only logged-in employees can access the dashboard — no public access",                          "Attempt to open dashboard without login; should show login screen",   <Bdg color="red">Must</Bdg>],
-                ["NFR-004", "Revenue numbers must match the source platform numbers within ±1% (accounting for timing)",    "Compare dashboard totals with platform exports for the same date",    <Bdg color="red">Must</Bdg>],
-                ["NFR-005", "Dashboard must work properly on mobile phones (for the Sales Manager who travels frequently)", "Open dashboard on an Android phone and iPhone; all views must load",  <Bdg color="yellow">Should</Bdg>],
+                ["NFR-001", "Dashboard must load within 3 seconds on a normal internet connection",                          "Tested by opening the dashboard 10 times and measuring load time",   bd("red","Must")],
+                ["NFR-002", "Daily data refresh must complete by 6am so morning data is ready when the team starts work",   "Check that data is updated before 6am for 5 consecutive working days",bd("red","Must")],
+                ["NFR-003", "Only logged-in employees can access the dashboard — no public access",                          "Attempt to open dashboard without login; should show login screen",   bd("red","Must")],
+                ["NFR-004", "Revenue numbers must match the source platform numbers within ±1% (accounting for timing)",    "Compare dashboard totals with platform exports for the same date",    bd("red","Must")],
+                ["NFR-005", "Dashboard must work properly on mobile phones (for the Sales Manager who travels frequently)", "Open dashboard on an Android phone and iPhone; all views must load",  bd("yellow","Should")],
               ]} />
             </S>
 
@@ -871,10 +873,10 @@ ORDER BY sale_year, sale_month;`} />
             <S id="backlog" num="15" title="Backlog Creation & Prioritization"
               sub="The backlog is the full list of everything that needs to be built, sorted by priority. MoSCoW is the prioritization method: Must Have, Should Have, Could Have, Won't Have (for now).">
               <T hs={["Priority", "Stories", "What Gets Built", "When"]} rows={[
-                [<Bdg color="red">Must Have</Bdg>,    "12 stories — 55 points", "All 3 platform connections, product performance view, seasonal trend view, return rates, basic sales overview",   "Sprint 1 & 2"],
-                [<Bdg color="yellow">Should Have</Bdg>,"8 stories — 34 points",  "Marketing/channel ROI view, automated Monday email, ROAS calculation per product and channel",                    "Sprint 3"],
-                [<Bdg color="orange">Could Have</Bdg>, "5 stories — 22 points",  "3-month seasonal forecast, low-performer product alerts, mobile-optimised layout",                                "Sprint 4 if time permits"],
-                [<Bdg color="gray">Won&apos;t Have</Bdg>,"3 stories — —",         "Customer segmentation, WhatsApp alerts, integration with accounting software (planned for Phase 2)",             "Phase 2 backlog"],
+                [bd("red","Must Have"),    "12 stories — 55 points", "All 3 platform connections, product performance view, seasonal trend view, return rates, basic sales overview",   "Sprint 1 & 2"],
+                [bd("yellow","Should Have"),"8 stories — 34 points",  "Marketing/channel ROI view, automated Monday email, ROAS calculation per product and channel",                    "Sprint 3"],
+                [bd("orange","Could Have"), "5 stories — 22 points",  "3-month seasonal forecast, low-performer product alerts, mobile-optimised layout",                                "Sprint 4 if time permits"],
+                [bd("gray","Won't Have"),   "3 stories — —",          "Customer segmentation, WhatsApp alerts, integration with accounting software (planned for Phase 2)",             "Phase 2 backlog"],
               ]} />
               <Glass>
                 <h3 className="text-[#F9FAFB] text-sm font-semibold mb-4 uppercase tracking-wider">Sprint Plan — 4 Sprints of 2 Weeks Each</h3>
@@ -955,11 +957,11 @@ ORDER BY sale_year, sale_month;`} />
             <S id="uat" num="19" title="User Acceptance Testing (UAT)"
               sub="UAT is when the actual users test the system — not the developer, not the BA. They use it the way they would in real life and confirm it does what the BRD said it must do.">
               <T hs={["What Was Tested", "Test Cases", "Tested By", "Passed", "Failed", "Status"]} rows={[
-                ["Data accuracy — do dashboard numbers match platform numbers?", "8",  "Finance Manager + Sales Manager", "8",  "0", <Bdg color="green">All Pass</Bdg>],
-                ["Product performance view — all products, ROAS, return rates",  "10", "Sales Manager + Product Manager", "9",  "1", <Bdg color="yellow">1 Fixed</Bdg>],
-                ["Seasonal trends view — 24-month chart accuracy",               "6",  "Operations Manager",              "6",  "0", <Bdg color="green">All Pass</Bdg>],
-                ["Marketing ROI view — channel split and ROAS",                  "6",  "Marketing Manager",               "5",  "1", <Bdg color="yellow">1 Fixed</Bdg>],
-                ["Automated Monday email — correct numbers, arrives on time",    "4",  "Finance Manager",                 "4",  "0", <Bdg color="green">All Pass</Bdg>],
+                ["Data accuracy — do dashboard numbers match platform numbers?", "8",  "Finance Manager + Sales Manager", "8",  "0", bd("green","All Pass")],
+                ["Product performance view — all products, ROAS, return rates",  "10", "Sales Manager + Product Manager", "9",  "1", bd("yellow","1 Fixed")],
+                ["Seasonal trends view — 24-month chart accuracy",               "6",  "Operations Manager",              "6",  "0", bd("green","All Pass")],
+                ["Marketing ROI view — channel split and ROAS",                  "6",  "Marketing Manager",               "5",  "1", bd("yellow","1 Fixed")],
+                ["Automated Monday email — correct numbers, arrives on time",    "4",  "Finance Manager",                 "4",  "0", bd("green","All Pass")],
               ]} />
               <Glass>
                 <h3 className="text-[#F9FAFB] text-sm font-semibold mb-3 uppercase tracking-wider">Defects Found & Fixed</h3>
@@ -1041,11 +1043,11 @@ ORDER BY sale_year, sale_month;`} />
             <S id="pir" num="22" title="Post-Implementation Review"
               sub="The Post-Implementation Review (PIR) happens 4 weeks after go-live. It checks whether the system delivered what it promised, what went well, and what to do differently next time.">
               <T hs={["Finding", "Type", "Detail"]} rows={[
-                ["All 8 business requirements were delivered as agreed",           <Bdg color="green">Positive</Bdg>,     "Every requirement from the BRD was built, tested, and confirmed working at go-live"],
-                ["Premium product issue identified and actioned quickly",          <Bdg color="green">Positive</Bdg>,     "Within 1 week of go-live, the Product Manager used the dashboard to confirm the pricing hypothesis. The premium case was repriced from ₹1,499 to ₹999. Sales went up 180% in the first month after repricing."],
-                ["Seasonal planning happened for the first time this year",        <Bdg color="green">Positive</Bdg>,     "The Operations Manager used the 24-month trend view to plan January–March inventory 6 weeks in advance — instead of ordering based on last month as before. Over-ordering reduced by 40%."],
-                ["12% of website orders still showing as 'Other' product",         <Bdg color="yellow">Improvement</Bdg>,"The Shopify form issue (no product ID on some orders) was fixed but historical data cannot be corrected. Agreed to run a data cleaning exercise in Q2."],
-                ["Mobile dashboard works but has a slow load time on older phones",<Bdg color="yellow">Learning</Bdg>,    "iPhone 15 and recent Android phones load fast. Some older phones take 6–8 seconds. Flagged for optimisation in the next development cycle."],
+                ["All 8 business requirements were delivered as agreed",           bd("green","Positive"),     "Every requirement from the BRD was built, tested, and confirmed working at go-live"],
+                ["Premium product issue identified and actioned quickly",          bd("green","Positive"),     "Within 1 week of go-live, the Product Manager used the dashboard to confirm the pricing hypothesis. The premium case was repriced from ₹1,499 to ₹999. Sales went up 180% in the first month after repricing."],
+                ["Seasonal planning happened for the first time this year",        bd("green","Positive"),     "The Operations Manager used the 24-month trend view to plan January–March inventory 6 weeks in advance — instead of ordering based on last month as before. Over-ordering reduced by 40%."],
+                ["12% of website orders still showing as 'Other' product",         bd("yellow","Improvement"),"The Shopify form issue (no product ID on some orders) was fixed but historical data cannot be corrected. Agreed to run a data cleaning exercise in Q2."],
+                ["Mobile dashboard works but has a slow load time on older phones",bd("yellow","Learning"),    "iPhone 15 and recent Android phones load fast. Some older phones take 6–8 seconds. Flagged for optimisation in the next development cycle."],
               ]} />
               <Glass>
                 <h3 className="text-[#F9FAFB] text-sm font-semibold mb-3 uppercase tracking-wider">3 Key Lessons from This Project</h3>
@@ -1074,14 +1076,14 @@ ORDER BY sale_year, sale_month;`} />
                 <MC v="20min" label="Time to get monthly report"       c="#F59E0B" note="Was 8–10 hours manually" />
               </div>
               <T hs={["What We Promised in BRD", "Target", "Actual Result (8 Weeks)", "Status"]} rows={[
-                ["Single combined view of Amazon + Flipkart + Website sales",            "Working dashboard with all 3 sources", "Live and accurate within ±0.8%",                     <Bdg color="green">Done</Bdg>],
-                ["Product comparison: sales vs. marketing spend side-by-side",           "All 6 products visible in one table",  "Table live; premium case identified as lowest ROAS (0.4)", <Bdg color="green">Done</Bdg>],
-                ["24-month seasonal sales chart to plan for slow months",                "Chart covering 24 months of history", "Chart live; Jan–Mar pattern clearly visible",         <Bdg color="green">Done</Bdg>],
-                ["Return rate visible per product",                                      "Return % per product shown",          "Return rates visible; one product found at 34% return rate", <Bdg color="green">Done</Bdg>],
-                ["Daily automated data refresh — no manual downloading",                 "Zero manual downloads needed",        "Sales Manager confirms no manual file downloaded in 8 weeks", <Bdg color="green">Done</Bdg>],
-                ["Channel-wise revenue: Amazon, Flipkart, Website separately",           "Each channel shown with net revenue", "All 3 channels visible; Website found to have highest ROAS", <Bdg color="green">Done</Bdg>],
-                ["Automated Monday email to Sales Manager and Finance Manager",           "Email arrives without manual action", "Email arriving every Monday 8am for 8 consecutive weeks", <Bdg color="green">Done</Bdg>],
-                ["3-month seasonal forecast for inventory planning",                     "Forecast within 15% of actual",       "Forecast accuracy: 11% variance in Month 1 after go-live",  <Bdg color="green">Done</Bdg>],
+                ["Single combined view of Amazon + Flipkart + Website sales",            "Working dashboard with all 3 sources", "Live and accurate within ±0.8%",                     bd("green","Done")],
+                ["Product comparison: sales vs. marketing spend side-by-side",           "All 6 products visible in one table",  "Table live; premium case identified as lowest ROAS (0.4)", bd("green","Done")],
+                ["24-month seasonal sales chart to plan for slow months",                "Chart covering 24 months of history", "Chart live; Jan–Mar pattern clearly visible",         bd("green","Done")],
+                ["Return rate visible per product",                                      "Return % per product shown",          "Return rates visible; one product found at 34% return rate", bd("green","Done")],
+                ["Daily automated data refresh — no manual downloading",                 "Zero manual downloads needed",        "Sales Manager confirms no manual file downloaded in 8 weeks", bd("green","Done")],
+                ["Channel-wise revenue: Amazon, Flipkart, Website separately",           "Each channel shown with net revenue", "All 3 channels visible; Website found to have highest ROAS", bd("green","Done")],
+                ["Automated Monday email to Sales Manager and Finance Manager",           "Email arrives without manual action", "Email arriving every Monday 8am for 8 consecutive weeks", bd("green","Done")],
+                ["3-month seasonal forecast for inventory planning",                     "Forecast within 15% of actual",       "Forecast accuracy: 11% variance in Month 1 after go-live",  bd("green","Done")],
               ]} />
               <Glass>
                 <p className="text-[#D1D5DB] text-sm italic leading-relaxed border-l-2 pl-4" style={{ borderColor: "#10B981" }}>
